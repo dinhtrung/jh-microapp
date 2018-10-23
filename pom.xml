@@ -54,7 +54,6 @@
         <jacoco-maven-plugin.version>0.8.2</jacoco-maven-plugin.version>
         <scala-maven-plugin.version>3.4.2</scala-maven-plugin.version>
         <sonar-maven-plugin.version>3.5.0.1254</sonar-maven-plugin.version>
-        <openapi-generator-maven-plugin.version>3.3.0</openapi-generator-maven-plugin.version>
         <git-commit-id-plugin.version>2.2.5</git-commit-id-plugin.version>
 
         <!-- Sonar properties -->
@@ -84,6 +83,7 @@
         <sonar.tests>${project.basedir}/src/test/</sonar.tests>
 
         <!-- jhipster-needle-maven-property -->
+        <axis2.version>1.7.8</axis2.version>
     </properties>
 
     <dependencyManagement>
@@ -185,11 +185,6 @@
             <artifactId>commons-lang3</artifactId>
         </dependency>
         <dependency>
-            <groupId>de.flapdoodle.embed</groupId>
-            <artifactId>de.flapdoodle.embed.mongo</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <scope>test</scope>
@@ -197,10 +192,6 @@
         <dependency>
             <groupId>net.logstash.logback</groupId>
             <artifactId>logstash-logback-encoder</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.mongobee</groupId>
-            <artifactId>mongobee</artifactId>
         </dependency>
         <dependency>
             <groupId>org.mapstruct</groupId>
@@ -229,10 +220,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -288,45 +275,45 @@
             <artifactId>jjwt-jackson</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <!-- Spring Cloud -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.retry</groupId>
-            <artifactId>spring-retry</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-config</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-cloud-connectors</artifactId>
-        </dependency>
         <!-- Security -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-data</artifactId>
         </dependency>
         <!-- jhipster-needle-maven-add-dependency -->
+        <!-- AXIS2 -->
+        <dependency>
+			<groupId>org.apache.axis2</groupId>
+			<artifactId>axis2-spring</artifactId>
+			<version>${axis2.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.servlet</groupId>
+					<artifactId>servlet-api</artifactId>
+				</exclusion>
+			</exclusions>
+        </dependency>
+		<dependency>
+			<groupId>org.apache.axis2</groupId>
+			<artifactId>axis2-xmlbeans</artifactId>
+			<version>${axis2.version}</version>
+		</dependency>
+		<dependency>
+            <groupId>org.apache.axis2</groupId>
+            <artifactId>axis2-transport-base</artifactId>
+            <version>${axis2.version}</version>
+        </dependency>
+		<dependency>
+			<groupId>org.apache.axis2</groupId>
+			<artifactId>axis2-transport-http</artifactId>
+			<version>${axis2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.axis2</groupId>
+			<artifactId>axis2-transport-local</artifactId>
+			<version>${axis2.version}</version>
+		</dependency>
+        <!-- / AXIS2  -->
     </dependencies>
 
     <build>
@@ -527,33 +514,6 @@
                     </container>
                 </configuration>
             </plugin>
-            <plugin>
-                <!--
-                    Plugin that provides API-first development using openapi-generator to
-                    generate Spring-MVC endpoint stubs at compile time from an OpenAPI definition file
-                -->
-                <groupId>org.openapitools</groupId>
-                <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>${openapi-generator-maven-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <inputSpec>${project.basedir}/src/main/resources/swagger/api.yml</inputSpec>
-                            <generatorName>spring</generatorName>
-                            <apiPackage>com.ft.web.api</apiPackage>
-                            <modelPackage>com.ft.web.api.model</modelPackage>
-                            <supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
-                            <validateSpec>true</validateSpec>
-                            <configOptions>
-                                <delegatePattern>true</delegatePattern>
-                            </configOptions>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
             <!-- jhipster-needle-maven-add-plugin -->
         </plugins>
         <pluginManagement>
@@ -585,19 +545,6 @@
                                     </pluginExecutionFilter>
                                     <action>
                                         <ignore/>
-                                    </action>
-                                </pluginExecution>
-                                <pluginExecution>
-                                    <pluginExecutionFilter>
-                                        <groupId>org.openapitools</groupId>
-                                        <artifactId>openapi-generator-maven-plugin</artifactId>
-                                        <versionRange>${openapi-generator-maven-plugin.version}</versionRange>
-                                        <goals>
-                                            <goal>generate</goal>
-                                        </goals>
-                                    </pluginExecutionFilter>
-                                    <action>
-                                        <ignore />
                                     </action>
                                 </pluginExecution>
                             </pluginExecutions>

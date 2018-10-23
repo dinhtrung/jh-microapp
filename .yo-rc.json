@@ -12,30 +12,26 @@
     "cacheProvider": "no",
     "enableHibernateCache": false,
     "websocket": false,
-    "databaseType": "mongodb",
-    "devDatabaseType": "mongodb",
-    "prodDatabaseType": "mongodb",
+    "databaseType": "no",
+    "devDatabaseType": "no",
+    "prodDatabaseType": "no",
     "searchEngine": false,
-    "enableSwaggerCodegen": "true",
+    "enableSwaggerCodegen": false,
     "messageBroker": false,
     "buildTool": "maven",
     "useSass": false,
     "clientPackageManager": "npm",
     "testFrameworks": [],
-    "enableTranslation": true,
+    "enableTranslation": false,
     "nativeLanguage": "en",
     "languages": [
-      "vi",
       "en"
     ],
     "clientFramework": "angularX",
     "jhiPrefix": "jhi",
     "jhipsterVersion": "5.5.0",
-    "jwtSecretKey": "NWU2Nzg0YTRjNDgyNjY0M2YxYWRjNWY4ZGRjYjFiZDc0Mzg5MDQ3Nzg0NTE0NGQzNGEwZTczY2ZkMWM2ZjU4MGYwNTkzMWQwNjVkYzc1NmU0ZmI4NWI5OWM3ZjJkZWNmYTJkODg2MDFiM2M4MzFhYzI0MDVlNTliNDZmY2E0YmM=",
+    "jwtSecretKey": "NTg0M2U3ODIzODY3MWY5OTA4ODY1ZjMzZTQ5Zjg4YzdhNTVjMzEyYjM0NTJjZmQ3YjJjZDU1NzU1YzdhODY2NGVlODBjNTFhOGVjZjFkNDc5NjZjYTJmZTNiYzM5NjVhOTk4Njc5NjBlYjgzMDZkNmQxNTFlNWRlMGM3YzVjODA=",
     "skipClient": true,
     "skipUserManagement": true
-  },
-  "git-provider": "GitHub",
-  "git-company": "dinhtrung",
-  "repository-name": "jh-microapp"
+  }
 }

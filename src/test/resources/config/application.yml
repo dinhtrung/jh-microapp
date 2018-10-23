@@ -23,11 +23,6 @@ eureka:
 spring:
     application:
         name: app
-    data:
-        mongodb:
-            host: localhost
-            port: 0
-            database: app
     mail:
         host: localhost
     messages:
@@ -69,7 +64,7 @@ jhipster:
         authentication:
             jwt:
                 # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
-                base64-secret: NWU2Nzg0YTRjNDgyNjY0M2YxYWRjNWY4ZGRjYjFiZDc0Mzg5MDQ3Nzg0NTE0NGQzNGEwZTczY2ZkMWM2ZjU4MGYwNTkzMWQwNjVkYzc1NmU0ZmI4NWI5OWM3ZjJkZWNmYTJkODg2MDFiM2M4MzFhYzI0MDVlNTliNDZmY2E0YmM=
+                base64-secret: NTg0M2U3ODIzODY3MWY5OTA4ODY1ZjMzZTQ5Zjg4YzdhNTVjMzEyYjM0NTJjZmQ3YjJjZDU1NzU1YzdhODY2NGVlODBjNTFhOGVjZjFkNDc5NjZjYTJmZTNiYzM5NjVhOTk4Njc5NjBlYjgzMDZkNmQxNTFlNWRlMGM3YzVjODA=
                 # Token is valid 24 hours
                 token-validity-in-seconds: 86400
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
