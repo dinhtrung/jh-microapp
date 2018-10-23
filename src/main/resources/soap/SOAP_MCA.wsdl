@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="tns:ns" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="tns:ns" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="tns:ns">
+      <s:element name="sendLU">
+        <s:complexType>
+          <s:sequence>
+            <s:element maxOccurs="1" minOccurs="1" name="tid" type="s:string"/>
+            <s:element maxOccurs="1" minOccurs="1" name="imsi" type="s:string"/>
+            <s:element maxOccurs="1" minOccurs="1" name="cdpa" type="s:string"/>
+            <s:element maxOccurs="1" minOccurs="1" name="cgpa" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="sendCL">
+        <s:complexType>
+          <s:sequence>
+            <s:element maxOccurs="1" minOccurs="1" name="tid" type="s:string"/>
+            <s:element maxOccurs="1" minOccurs="1" name="imsi" type="s:string"/>
+            <s:element maxOccurs="1" minOccurs="1" name="cdpa" type="s:string"/>
+            <s:element maxOccurs="1" minOccurs="1" name="cgpa" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="sendISD">
+        <s:complexType>
+          <s:sequence>
+            <s:element maxOccurs="1" minOccurs="1" name="tid" type="s:string"/>
+            <s:element maxOccurs="1" minOccurs="1" name="msisdn" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="sendLUResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="response" nillable="true" type="tns:result"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="sendCLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="response" nillable="true" type="tns:result"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="sendISDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="response" nillable="true" type="tns:result"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="result">
+        <s:sequence>
+          <s:element minOccurs="1" name="responseCode" type="s:int"/>
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="sendLU">
+    <wsdl:part name="parameters" element="tns:sendLU">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="sendCL">
+    <wsdl:part name="parameters" element="tns:sendCL">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="sendISD">
+    <wsdl:part name="parameters" element="tns:sendISD">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="sendLUResponse">
+    <wsdl:part name="parameters" element="tns:sendLUResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="sendCLResponse">
+    <wsdl:part name="parameters" element="tns:sendCLResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="sendISDResponse">
+    <wsdl:part name="parameters" element="tns:sendISDResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="SOAP_MCA">
+    <wsdl:operation name="sendLU">
+      <wsdl:input message="tns:sendLU">
+    </wsdl:input>
+      <wsdl:output message="tns:sendLUResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendCL">
+      <wsdl:input message="tns:sendCL">
+    </wsdl:input>
+      <wsdl:output message="tns:sendCLResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendISD">
+      <wsdl:input message="tns:sendISD">
+    </wsdl:input>
+      <wsdl:output message="tns:sendISDResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SOAP_MCA" type="tns:SOAP_MCA">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="sendLU">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendCL">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendISD">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SOAP_MCA">
+    <wsdl:port name="SOAP_MCA" binding="tns:SOAP_MCA">
+      <soap:address location="http://localhost:8823/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

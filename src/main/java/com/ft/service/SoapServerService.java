@@ -17,33 +17,40 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.ft.config.ApplicationProperties;
+import com.ft.soap.Result;
+import com.ft.soap.SOAPMCA;
 
 @EnableScheduling
 @Service
-public class SoapServerService {
+public class SoapServerService implements SOAPMCA {
 
     private final Logger log = LoggerFactory.getLogger(SoapServerService.class);
 
     @Autowired
-    private Executor scheduledTaskExecutor;
-
-    @Autowired
     private ApplicationProperties props;
 
+	@Override
+	public Result sendLU(String tid, String imsi, String cdpa, String cgpa) {
+		// TODO Auto-generated method stub
+		log.debug("sendLU: tid=" + tid + ", imsi=" + imsi + ", cdpa=" + cdpa + ", cgpa=" + cgpa);
+		Result result = new Result();
+		result.setResponseCode(0);
+		return result;
+	}
 
-    /**
-     * Execute every 15 minutes, from 08AM - 21PM everyday
-     */
-    @Scheduled(fixedDelay = 10000)
-    public int submit() throws Exception {
-    	return 0;
-    }
+	@Override
+	public Result sendCL(String tid, String imsi, String cdpa, String cgpa) {
+		log.debug("sendCL: tid=" + tid + ", imsi=" + imsi + ", cdpa=" + cdpa + ", cgpa=" + cgpa);
+		Result result = new Result();
+		result.setResponseCode(0);
+		return result;
+	}
 
-    /**
-     * Deliver SMS Response to customer every 10 seconds
-     */
-    @Scheduled(fixedDelay = 10000)
-    public void sendSmsResponse() {
-    	
-    }
+	@Override
+	public Result sendISD(String tid, String msisdn) {
+		log.debug("sendISD: tid=" + tid + ", msisdn=" + msisdn);
+		Result result = new Result();
+		result.setResponseCode(0);
+		return result;
+	}
 }

@@ -1,5 +1,6 @@
 package com.ft.web.rest;
 
+import java.net.URL;
 import java.rmi.RemoteException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,17 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
 import com.ft.config.ApplicationProperties;
-
-import ns.SOAP_MCAStub;
-import ns.SendCLDocument;
-import ns.SendCLDocument.SendCL;
-import ns.SendCLResponseDocument;
-import ns.SendISDDocument;
-import ns.SendISDDocument.SendISD;
-import ns.SendISDResponseDocument;
-import ns.SendLUDocument;
-import ns.SendLUDocument.SendLU;
-import ns.SendLUResponseDocument;
+import com.ft.soap.Result;
+import com.ft.soap.SOAPMCA_Service;
 
 /**
  * REST controller for managing Cdr.
@@ -46,20 +38,14 @@ public class SoapClientResource {
      */
     @GetMapping("/cancel-location")
     @Timed
-    public ResponseEntity<SendCLResponseDocument> sendClearLocation(
+    public ResponseEntity<Result> sendClearLocation(
     		@RequestParam String cdpa, 
     		@RequestParam String cgpa, 
     		@RequestParam String imsi, 
     		@RequestParam String tid
     ) throws Exception {
-		SendCLDocument doc = SendCLDocument.Factory.newInstance();
-		SendCL evt = doc.addNewSendCL();
-		evt.setCdpa(cdpa);
-		evt.setCgpa(cgpa);
-		evt.setImsi(imsi);
-		evt.setTid(tid);
-		SOAP_MCAStub stub = new SOAP_MCAStub(props.getServerUrl());
-		SendCLResponseDocument resp = stub.sendCL(doc);
+    	SOAPMCA_Service soapClient = new SOAPMCA_Service(new URL(props.getServerUrl()));
+		Result resp = soapClient.getSOAPMCA().sendCL(tid, imsi, cdpa, cgpa);
 		return ResponseEntity.ok(resp);
     }
     
@@ -77,16 +63,12 @@ public class SoapClientResource {
      */
     @GetMapping("/insert-subscriber-data")
     @Timed
-    public ResponseEntity<SendISDResponseDocument> sendInsertSubscriberData(
+    public ResponseEntity<Result> sendInsertSubscriberData(
     		@RequestParam String msisdn, 
     		@RequestParam String tid
     ) throws Exception {
-		SendISDDocument doc = SendISDDocument.Factory.newInstance();
-		SendISD evt = doc.addNewSendISD();
-		evt.setTid(tid);
-		evt.setMsisdn(msisdn);
-		SOAP_MCAStub stub = new SOAP_MCAStub(props.getServerUrl());
-		SendISDResponseDocument resp = stub.sendISD(doc);
+    	SOAPMCA_Service soapClient = new SOAPMCA_Service(new URL(props.getServerUrl()));
+		Result resp = soapClient.getSOAPMCA().sendISD(tid, msisdn);
 		return ResponseEntity.ok(resp);
     }
     
@@ -104,20 +86,14 @@ public class SoapClientResource {
      */
     @GetMapping("/location-update")
     @Timed
-    public ResponseEntity<SendLUResponseDocument> sendLocationUpdate(
+    public ResponseEntity<Result> sendLocationUpdate(
     		@RequestParam String cdpa, 
     		@RequestParam String cgpa, 
     		@RequestParam String imsi, 
     		@RequestParam String tid
     ) throws Exception {
-		SendLUDocument doc = SendLUDocument.Factory.newInstance();
-		SendLU evt = doc.addNewSendLU();
-		evt.setCdpa(cdpa);
-		evt.setCgpa(cgpa);
-		evt.setImsi(imsi);
-		evt.setTid(tid);
-		SOAP_MCAStub stub = new SOAP_MCAStub(props.getServerUrl());
-		SendLUResponseDocument resp = stub.sendLU(doc);
+    	SOAPMCA_Service soapClient = new SOAPMCA_Service(new URL(props.getServerUrl()));
+		Result resp = soapClient.getSOAPMCA().sendLU(tid, imsi, cdpa, cgpa);
 		return ResponseEntity.ok(resp);
     }
 }

@@ -115,4 +115,5 @@ jhipster:
 # https://www.jhipster.tech/common-application-properties/
 # ===================================================================
 
-# application:
+application:
+    server-url: http://localhost:8088/mockSOAP_MCA?WSDL

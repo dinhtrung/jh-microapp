@@ -20,5 +20,16 @@ public class ApplicationProperties {
 	public void setServerUrl(String serverUrl) {
 		this.serverUrl = serverUrl;
 	}
+	
+	private String webroot = "/ws/*";
+
+	public String getWebroot() {
+		return webroot;
+	}
+
+	public void setWebroot(String webroot) {
+		this.webroot = webroot;
+	}
+	
 
 }
