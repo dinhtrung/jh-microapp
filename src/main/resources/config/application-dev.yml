@@ -116,4 +116,6 @@ jhipster:
 # ===================================================================
 
 application:
-    server-url: http://localhost:8088/mockSOAP_MCA?WSDL
+    cl-url: http://localhost:15100/
+    lu-url: http://localhost:15100/
+    isd-url: http://localhost:15100/

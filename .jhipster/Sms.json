@@ -1,0 +1,72 @@
+{
+    "name": "Sms",
+    "fields": [
+        {
+            "fieldName": "source",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 40
+        },
+        {
+            "fieldName": "destination",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 40
+        },
+        {
+            "fieldName": "text",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "submitAt",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "expiredAt",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "deliveredAt",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "state",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "min",
+                "max",
+                "required"
+            ],
+            "fieldValidateRulesMin": -9,
+            "fieldValidateRulesMax": 9
+        },
+        {
+            "fieldName": "productId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "contentId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "tnxId",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20181018092713",
+    "javadoc": "Following complex attributes are here\ntags List<String>\ncfg Map<String, Object>\nsubmitRequest Object\nsubmitResponse Object\ndeliveryRequest Object\ndeliveryResponse Object",
+    "entityTableName": "sms",
+    "dto": "mapstruct",
+    "pagination": "pager",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "app",
+    "applications": "*",
+    "microserviceName": "app"
+}

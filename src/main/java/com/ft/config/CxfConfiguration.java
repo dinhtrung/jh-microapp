@@ -29,6 +29,9 @@ public class CxfConfiguration {
 	private void load() {
 		log.info("================= CXF WEB SERVICE ENDPOINTS ======================");
 		log.info("========== WEBROOT: " + props.getWebroot() + "==============");
+		log.info("========== SEND ISD: " + props.getIsdUrl() + "==============");
+		log.info("========== SEND CL: " + props.getClUrl() + "==============");
+		log.info("========== SEND LU: " + props.getLuUrl() + "==============");
 	}
 
 	@Bean

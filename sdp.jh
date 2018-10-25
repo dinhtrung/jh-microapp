@@ -1,0 +1,105 @@
+/**
+* Do Not Disturb list
+*/
+entity Dnd {
+	joinAt ZonedDateTime,
+    joinChannel String maxlength(40)
+}
+
+/** 
+ * Following complex attributes are here
+ *   chargingProfiles Map<String, Object>: Charging Profile
+ *   joinPattern List<String> 
+ *   leftPattern List<String> 
+ *   tags List<String> 
+ *   broadcast Map<String, Object>: Broadcast Information 
+ *   msg Map<String, String>: Message types: contents 
+ */
+entity SubProduct {
+	/** The name of the product */
+	code String required maxlength(80),
+    description TextBlob,	
+	misc TextBlob
+}
+
+/** 
+  * Following complex attributes are here
+  *   tags List<String>
+  *   cfg Map<String, Object>
+  */
+entity SmsContent {
+	startAt ZonedDateTime,
+    expiredAt ZonedDateTime,
+    message String,
+    productId String,
+    state Integer min(-9) max(9) required
+}
+
+/** 
+ * Following complex attributes are here
+ *   tags List<String>
+ *   cfg Map<String, Object>
+ *   submitRequest Object
+ *   submitResponse Object
+ *   deliveryRequest Object
+ *   deliveryResponse Object
+ */
+entity Sms {
+	source String maxlength(40),
+    destination String maxlength(40),
+    text String,
+    submitAt ZonedDateTime,
+    expiredAt ZonedDateTime,
+    deliveredAt ZonedDateTime,
+    state Integer min(-9) max(9) required,
+    productId String,
+    contentId String,
+    tnxId String
+}
+
+/** 
+ * Following complex attributes are here
+ *   tags List<String>
+ *   cfg Map<String, Object>
+ *   chargeRequest Object
+ *   chargeResponse Object
+ */
+entity Cdr {
+	msisdn String maxlength(40) required,
+	state Integer min(-9) max(9),
+    amount Double required,
+    requestAt ZonedDateTime,
+    responseAt ZonedDateTime
+    productId String,
+    contentId String
+}
+/** 
+ * Following complex attributes are here
+ *   tags List<String>
+ *   provisioning Map<String, Object>
+ *   cfg Map<String, Object>
+ */
+entity SubMsisdn {
+   msisdn String maxlength(40) required,
+   productId String required,
+   trialCnt Integer,
+   successCnt Integer,
+   state Integer min(-9) max(9) required,
+   joinAt ZonedDateTime,
+   leftAt ZonedDateTime,
+   expiryTime ZonedDateTime,
+   chargeLastTime ZonedDateTime,
+   chargeNextTime ZonedDateTime,
+   chargeLastSuccess ZonedDateTime,
+   notify Integer min(-9) max(9) required,
+   notifyLastTime ZonedDateTime
+}
+
+dto all with mapstruct
+service all with serviceClass
+paginate all with pager
+
+
+
+
+

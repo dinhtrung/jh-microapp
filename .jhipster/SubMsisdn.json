@@ -1,0 +1,91 @@
+{
+    "name": "SubMsisdn",
+    "fields": [
+        {
+            "fieldName": "msisdn",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength",
+                "required"
+            ],
+            "fieldValidateRulesMaxlength": 40
+        },
+        {
+            "fieldName": "productId",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "trialCnt",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "successCnt",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "state",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "min",
+                "max",
+                "required"
+            ],
+            "fieldValidateRulesMin": -9,
+            "fieldValidateRulesMax": 9
+        },
+        {
+            "fieldName": "joinAt",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "leftAt",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "expiryTime",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "chargeLastTime",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "chargeNextTime",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "chargeLastSuccess",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "notify",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "min",
+                "max",
+                "required"
+            ],
+            "fieldValidateRulesMin": -9,
+            "fieldValidateRulesMax": 9
+        },
+        {
+            "fieldName": "notifyLastTime",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20181018092715",
+    "javadoc": "Following complex attributes are here\ntags List<String>\nprovisioning Map<String, Object>\ncfg Map<String, Object>",
+    "entityTableName": "sub_msisdn",
+    "dto": "mapstruct",
+    "pagination": "pager",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "app",
+    "applications": "*",
+    "microserviceName": "app"
+}

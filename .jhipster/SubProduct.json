@@ -1,0 +1,37 @@
+{
+    "name": "SubProduct",
+    "fields": [
+        {
+            "fieldName": "code",
+            "javadoc": "The name of the product",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 80
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "misc",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20181018092711",
+    "javadoc": "Following complex attributes are here\nchargingProfiles Map<String, Object>: Charging Profile\njoinPattern List<String>\nleftPattern List<String>\ntags List<String>\nbroadcast Map<String, Object>: Broadcast Information\nmsg Map<String, String>: Message types: contents",
+    "entityTableName": "sub_product",
+    "dto": "mapstruct",
+    "pagination": "pager",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "app",
+    "applications": "*",
+    "microserviceName": "app"
+}

@@ -1,0 +1,29 @@
+{
+    "name": "Dnd",
+    "fields": [
+        {
+            "fieldName": "joinAt",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "joinChannel",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 40
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20181018092710",
+    "javadoc": "Do Not Disturb list",
+    "entityTableName": "dnd",
+    "dto": "mapstruct",
+    "pagination": "pager",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "app",
+    "applications": "*",
+    "microserviceName": "app"
+}

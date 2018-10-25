@@ -1,6 +1,5 @@
 package com.ft.web.rest;
 
-import java.net.URL;
 import java.rmi.RemoteException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.codahale.metrics.annotation.Timed;
 import com.ft.config.ApplicationProperties;
 import com.ft.soap.Result;
-import com.ft.soap.SOAPMCA_Service;
+import com.ft.soap.SOAPMCA;
 
 /**
  * REST controller for managing Cdr.
@@ -24,6 +23,15 @@ public class SoapClientResource {
 
 	@Autowired
 	ApplicationProperties props;
+	
+	@Autowired
+    SOAPMCA LUClient;
+    
+    @Autowired
+    SOAPMCA CLClient;
+    
+    @Autowired
+    SOAPMCA ISDClient;
 	
 	/**
      * GET  /sub-products/:id : get the "id" subProduct.
@@ -44,8 +52,7 @@ public class SoapClientResource {
     		@RequestParam String imsi, 
     		@RequestParam String tid
     ) throws Exception {
-    	SOAPMCA_Service soapClient = new SOAPMCA_Service(new URL(props.getServerUrl()));
-		Result resp = soapClient.getSOAPMCA().sendCL(tid, imsi, cdpa, cgpa);
+		Result resp = CLClient.sendCL(tid, imsi, cdpa, cgpa);
 		return ResponseEntity.ok(resp);
     }
     
@@ -67,8 +74,7 @@ public class SoapClientResource {
     		@RequestParam String msisdn, 
     		@RequestParam String tid
     ) throws Exception {
-    	SOAPMCA_Service soapClient = new SOAPMCA_Service(new URL(props.getServerUrl()));
-		Result resp = soapClient.getSOAPMCA().sendISD(tid, msisdn);
+		Result resp = ISDClient.sendISD(tid, msisdn);
 		return ResponseEntity.ok(resp);
     }
     
@@ -92,8 +98,7 @@ public class SoapClientResource {
     		@RequestParam String imsi, 
     		@RequestParam String tid
     ) throws Exception {
-    	SOAPMCA_Service soapClient = new SOAPMCA_Service(new URL(props.getServerUrl()));
-		Result resp = soapClient.getSOAPMCA().sendLU(tid, imsi, cdpa, cgpa);
+		Result resp = LUClient.sendLU(tid, imsi, cdpa, cgpa);
 		return ResponseEntity.ok(resp);
     }
 }

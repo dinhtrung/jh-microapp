@@ -11,16 +11,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "application", ignoreUnknownFields = true)
 public class ApplicationProperties {
 	
-	private String serverUrl = "http://localhost/api/soap-service";
-
-	public String getServerUrl() {
-		return serverUrl;
-	}
-
-	public void setServerUrl(String serverUrl) {
-		this.serverUrl = serverUrl;
-	}
-	
 	private String webroot = "/ws/*";
 
 	public String getWebroot() {
@@ -31,5 +21,32 @@ public class ApplicationProperties {
 		this.webroot = webroot;
 	}
 	
+	private String clUrl;
+	private String isdUrl;
+	private String luUrl;
+
+	public String getClUrl() {
+		return clUrl;
+	}
+
+	public void setClUrl(String clUrl) {
+		this.clUrl = clUrl;
+	}
+
+	public String getIsdUrl() {
+		return isdUrl;
+	}
+
+	public void setIsdUrl(String isdUrl) {
+		this.isdUrl = isdUrl;
+	}
+
+	public String getLuUrl() {
+		return luUrl;
+	}
+
+	public void setLuUrl(String luUrl) {
+		this.luUrl = luUrl;
+	}
 
 }
