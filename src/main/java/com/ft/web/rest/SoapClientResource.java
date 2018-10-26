@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
 import com.ft.config.ApplicationProperties;
-import com.ft.soap.Result;
-import com.ft.soap.SOAPMCA;
+
+import tns.ns.Result;
+import tns.ns.SOAPMCA;
 
 /**
  * REST controller for managing Cdr.

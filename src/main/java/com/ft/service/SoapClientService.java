@@ -11,9 +11,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.ft.config.ApplicationProperties;
-import com.ft.soap.Result;
-import com.ft.soap.SOAPMCA;
-import com.ft.soap.SOAPMCA_Service;
+
+import tns.ns.Result;
+import tns.ns.SOAPMCA_Service;
 
 @EnableScheduling
 @Service

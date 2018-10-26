@@ -1,12 +1,13 @@
 package com.ft.config;
 
 import javax.annotation.PostConstruct;
+import javax.xml.ws.Endpoint;
 
 import org.apache.cxf.Bus;
 import org.apache.cxf.bus.spring.SpringBus;
-import javax.xml.ws.Endpoint;
 import org.apache.cxf.jaxws.EndpointImpl;
 import org.apache.cxf.transport.servlet.CXFServlet;
+import org.apache.cxf.ext.logging.LoggingFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,8 @@ import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.ft.soap.SOAPMCA;
-import com.ft.soap.SOAPMCA_Service;
+import tns.ns.SOAPMCA;
+import tns.ns.SOAPMCA_Service;
 
 @Configuration
 public class CxfConfiguration {
@@ -24,7 +25,7 @@ public class CxfConfiguration {
 
 	@Autowired
 	ApplicationProperties props;
-
+	
 	@PostConstruct
 	private void load() {
 		log.info("================= CXF WEB SERVICE ENDPOINTS ======================");
@@ -41,7 +42,12 @@ public class CxfConfiguration {
 
 	@Bean(name = Bus.DEFAULT_BUS_ID)
 	public SpringBus springBus() {
-		return new SpringBus();
+		SpringBus springBus = new SpringBus();
+        LoggingFeature logFeature = new LoggingFeature();
+        logFeature.setPrettyLogging(true);
+        logFeature.initialize(springBus);
+        springBus.getFeatures().add(logFeature);
+		return springBus;
 	}
 	
 	/**
@@ -62,6 +68,9 @@ public class CxfConfiguration {
         endpoint.setServiceName(mcaService().getServiceName());
         endpoint.setWsdlLocation(mcaService().getWSDLDocumentLocation().toString());
         endpoint.publish("/mca");
+//        LoggingFeature logFeature = new LoggingFeature();
+//        logFeature.setPrettyLogging(true);
+//        endpoint.getFeatures().add(logFeature);
         return endpoint;
     }
 }

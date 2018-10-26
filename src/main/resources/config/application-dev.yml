@@ -116,6 +116,6 @@ jhipster:
 # ===================================================================
 
 application:
-    cl-url: http://localhost:15100/
-    lu-url: http://localhost:15100/
-    isd-url: http://localhost:15100/
+    cl-url: http://localhost:8081/ws/mca?wsdl
+    lu-url: http://localhost:8081/ws/mca?wsdl
+    isd-url: http://localhost:8081/ws/mca?wsdl
