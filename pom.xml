@@ -2,11 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.ft</groupId>
-    <artifactId>app</artifactId>
+    <groupId>com.istt</groupId>
+    <artifactId>vasgate-adapter</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>App</name>
+    <name>VASGATE RESTFUL ADAPTER</name>
 
     <repositories>
         <!-- jhipster-needle-maven-repository -->
@@ -315,7 +315,7 @@
 			                <sourceRoot>${project.build.directory}/generated-sources/cxf</sourceRoot>
 			                <wsdlOptions>
 			                    <wsdlOption>
-			                        <wsdl>${basedir}/src/main/resources/soap/SOAP_MCA.wsdl</wsdl>
+			                        <wsdl>${basedir}/src/main/resources/soap/SOAPRequestService_1.0.0.wsdl</wsdl>
 			                    </wsdlOption>
 			                </wsdlOptions>
 			            </configuration>
@@ -501,7 +501,7 @@
                         <image>openjdk:8-jre-alpine</image>
                     </from>
                     <to>
-                        <image>app:latest</image>
+                        <image>registry.gitlab.com/istt.com.vn/oam:${project.artifactId}</image>
                     </to>
                     <container>
                         <entrypoint>

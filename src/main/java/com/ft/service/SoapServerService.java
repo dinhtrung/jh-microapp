@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service;
 
 import com.ft.config.ApplicationProperties;
 
-import tns.ns.Result;
-import tns.ns.SOAPMCA;
+import telsoft.app.object.Exception_Exception;
+import telsoft.app.object.SOAPRequest;
 
 @EnableScheduling
 @Service
-public class SoapServerService implements SOAPMCA {
+public class SoapServerService implements SOAPRequest {
 
     private final Logger log = LoggerFactory.getLogger(SoapServerService.class);
 
@@ -22,27 +22,59 @@ public class SoapServerService implements SOAPMCA {
     private ApplicationProperties props;
 
 	@Override
-	public Result sendLU(String tid, String imsi, String cdpa, String cgpa) {
+	public String minusMoney(String serviceCode, String isdn, String packageCode, String userName, String password)
+			throws Exception_Exception {
 		// TODO Auto-generated method stub
-		Result result = new Result();
-		result.setResponseCode(RandomUtils.nextInt());
-		log.debug("sendLU: tid=" + tid + ", imsi=" + imsi + ", cdpa=" + cdpa + ", cgpa=" + cgpa + " >> RESULT: " + result.getResponseCode());
-		return result;
+		return null;
 	}
 
 	@Override
-	public Result sendCL(String tid, String imsi, String cdpa, String cgpa) {
-		Result result = new Result();
-		result.setResponseCode(RandomUtils.nextInt());
-		log.debug("sendCL: tid=" + tid + ", imsi=" + imsi + ", cdpa=" + cdpa + ", cgpa=" + cgpa + " >> RESULT: " + result.getResponseCode());
-		return result;
+	public String minusMoneyOtp(String serviceCode, String isdn, String contentId, String contentName, String amount,
+			String userName, String password) throws Exception_Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public Result sendISD(String tid, String msisdn) {
-		Result result = new Result();
-		result.setResponseCode(RandomUtils.nextInt());
-		log.debug("sendISD: tid=" + tid + ", msisdn=" + msisdn + " >> RESULT: " + result.getResponseCode());
-		return result;
+	public String sendMessage(String serviceCode, String isdn, String content, String user, String password)
+			throws Exception_Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String receiverServiceReq(String isdn, String serviceCode, String commandCode, String packageCode,
+			String sourceCode, String user, String password, String description) throws Exception_Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String exeReceivedCPMT(String serviceCode, String packageCode, String contents, String userName,
+			String password) throws Exception_Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String receiverPackageReq(String isdn, String serviceCode, String startDatetime, String endDatetime,
+			String groupCode, String commandCode, String packageCode, String sourceCode, String user, String password,
+			String description) throws Exception_Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String confirmMinusMoney(String transactionId, String otp, String userName, String password)
+			throws Exception_Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getInfomationCcgw(String serviceCode, String isdn, String sourceCode, String userName,
+			String password) throws Exception_Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

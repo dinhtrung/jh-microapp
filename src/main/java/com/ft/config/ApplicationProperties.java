@@ -21,32 +21,14 @@ public class ApplicationProperties {
 		this.webroot = webroot;
 	}
 	
-	private String clUrl;
-	private String isdUrl;
-	private String luUrl;
+	private String vasgateEndpoint;
 
-	public String getClUrl() {
-		return clUrl;
+	public String getVasgateEndpoint() {
+		return vasgateEndpoint;
 	}
 
-	public void setClUrl(String clUrl) {
-		this.clUrl = clUrl;
+	public void setVasgateEndpoint(String vasgateEndpoint) {
+		this.vasgateEndpoint = vasgateEndpoint;
 	}
-
-	public String getIsdUrl() {
-		return isdUrl;
-	}
-
-	public void setIsdUrl(String isdUrl) {
-		this.isdUrl = isdUrl;
-	}
-
-	public String getLuUrl() {
-		return luUrl;
-	}
-
-	public void setLuUrl(String luUrl) {
-		this.luUrl = luUrl;
-	}
-
+	
 }

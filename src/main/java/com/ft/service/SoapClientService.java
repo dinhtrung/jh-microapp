@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 
 import com.ft.config.ApplicationProperties;
 
-import tns.ns.Result;
-import tns.ns.SOAPMCA_Service;
+import telsoft.app.object.SOAPRequest;
+import telsoft.app.object.SOAPRequestService;
 
 @EnableScheduling
 @Service
@@ -27,22 +27,16 @@ public class SoapClientService {
     /**
      * Execute every 15 minutes, from 08AM - 21PM everyday
      */
-    @Scheduled(fixedDelay = 60000)
+//    @Scheduled(fixedDelay = 60000)
     public int submit() throws Exception {
-		String tid = RandomStringUtils.randomNumeric(10);
-		String imsi = RandomStringUtils.randomNumeric(10);
-		String msisdn = RandomStringUtils.randomNumeric(10);
-		String cdpa = RandomStringUtils.randomNumeric(10);
-		String cgpa = RandomStringUtils.randomNumeric(10);
-		log.debug("tid=" + tid + ", imsi=" + imsi + ", msisdn=" + msisdn + ", cdpa=" + cdpa +  ", cgpa=" + cgpa);
-		Result luResp = new SOAPMCA_Service(URI.create(props.getLuUrl()).toURL())
-				.getSOAPMCA()
-				.sendLU(tid, imsi, cdpa, cgpa);
-		Result isdResp = new SOAPMCA_Service(URI.create(props.getIsdUrl()).toURL())
-				.getSOAPMCA().sendISD(tid, msisdn);
-		Result clResp = new SOAPMCA_Service(URI.create(props.getClUrl()).toURL())
-				.getSOAPMCA().sendCL(tid, imsi, cdpa, cgpa);
-		log.debug("LU=" + luResp.getResponseCode() + ", CL=" + clResp.getResponseCode() + ", ISD=" + isdResp.getResponseCode());
+//		SOAPRequest client = new SOAPRequestService(URI.create(props.getLuUrl()).toURL()).getSOAPRequestPort();
+//		client.receiverServiceReq(isdn, serviceCode, commandCode, packageCode, sourceCode, user, password, description);
+//		client.confirmMinusMoney(transactionId, otp, userName, password);
+//		client.exeReceivedCPMT(serviceCode, packageCode, contents, userName, password);
+//		client.getInfomationCcgw(serviceCode, isdn, sourceCode, userName, password);
+//		client.minusMoneyOtp(serviceCode, isdn, contentId, contentName, amount, userName, password);
+//		client.sendMessage(serviceCode, isdn, content, user, password);
+//		client.receiverServiceReq(isdn, serviceCode, commandCode, packageCode, sourceCode, user, password, description);
     	return 0;
     }
 }

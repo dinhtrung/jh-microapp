@@ -116,6 +116,4 @@ jhipster:
 # ===================================================================
 
 application:
-    cl-url: http://localhost:8081/ws/mca?wsdl
-    lu-url: http://localhost:8081/ws/mca?wsdl
-    isd-url: http://localhost:8081/ws/mca?wsdl
+    vasgate-endpoint: https://apigateway.mobifone.vn/mbfn/sb/SOAPRequestServicecps
