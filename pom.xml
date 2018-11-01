@@ -316,6 +316,7 @@
 			                <wsdlOptions>
 			                    <wsdlOption>
 			                        <wsdl>${basedir}/src/main/resources/soap/SOAPRequestService_1.0.0.wsdl</wsdl>
+			                        <wsdlLocation>classpath:soap/SOAPRequestService_1.0.0.wsdl</wsdlLocation>
 			                    </wsdlOption>
 			                </wsdlOptions>
 			            </configuration>
