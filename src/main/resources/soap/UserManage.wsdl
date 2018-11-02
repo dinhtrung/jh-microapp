@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions targetNamespace="http://usermanage.ivas.huawei.com" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://usermanage.ivas.huawei.com" xmlns:intf="http://usermanage.ivas.huawei.com" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns2="http://event.usermanage.ivas.huawei.com" xmlns:tns3="http://ivas.huawei.com" xmlns:tns4="http://response.usermanage.ivas.huawei.com" xmlns:tns5="http://info.ivas.huawei.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+ <wsdl:types>
+  <schema targetNamespace="http://ivas.huawei.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="BaseEvt">
+    <sequence>
+     <element name="portalAccount" nillable="true" type="xsd:string"/>
+     <element name="portalPwd" nillable="true" type="xsd:string"/>
+     <element name="portalType" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="BaseUpdateEvt">
+    <complexContent>
+     <extension base="tns3:BaseEvt">
+      <sequence>
+       <element name="moduleCode" nillable="true" type="xsd:string"/>
+       <element name="role" nillable="true" type="xsd:string"/>
+       <element name="roleCode" nillable="true" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="Response">
+    <sequence>
+     <element name="eventClassName" nillable="true" type="xsd:string"/>
+     <element name="operationID" type="xsd:long"/>
+     <element name="resultCode" type="xsd:int"/>
+     <element name="resultInfo" nillable="true" type="xsd:string"/>
+     <element name="returnCode" nillable="true" type="xsd:string"/>
+     <element name="transactionID" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="BaseQueryEvt">
+    <complexContent>
+     <extension base="tns3:BaseEvt">
+      <sequence>
+       <element name="endRecordNum" nillable="true" type="xsd:string"/>
+       <element name="queryType" nillable="true" type="xsd:string"/>
+       <element name="startRecordNum" nillable="true" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="BaseQueryResp">
+    <complexContent>
+     <extension base="tns3:Response">
+      <sequence>
+       <element name="recordSum" nillable="true" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+  <schema targetNamespace="http://usermanage.ivas.huawei.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="ArrayOf_xsd_string">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="xsd:string[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+   <complexType name="ArrayOf_tns5_ServiceOrder">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="tns5:ServiceOrder[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+   <complexType name="ArrayOf_tns5_UserInfo">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="tns5:UserInfo[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+  </schema>
+  <schema targetNamespace="http://event.usermanage.ivas.huawei.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="SubscribeEvt">
+    <complexContent>
+     <extension base="tns3:BaseUpdateEvt">
+      <sequence>
+       <element name="acceptedID" nillable="true" type="xsd:string"/>
+       <element name="additionalParamName" nillable="true" type="impl:ArrayOf_xsd_string"/>
+       <element name="additionalParamValue" nillable="true" type="impl:ArrayOf_xsd_string"/>
+       <element name="city" nillable="true" type="xsd:string"/>
+       <element name="couponCode" nillable="true" type="xsd:string"/>
+       <element name="dateOfBirth" nillable="true" type="xsd:string"/>
+       <element name="discountDuration" nillable="true" type="xsd:string"/>
+       <element name="discountPrice" nillable="true" type="xsd:string"/>
+       <element name="discountTime" nillable="true" type="xsd:string"/>
+       <element name="discountUnit" nillable="true" type="xsd:string"/>
+       <element name="email" nillable="true" type="xsd:string"/>
+       <element name="firstName" nillable="true" type="xsd:string"/>
+       <element name="groupID" nillable="true" type="xsd:string"/>
+       <element name="keyword" nillable="true" type="xsd:string"/>
+       <element name="languageID" nillable="true" type="xsd:string"/>
+       <element name="lastName" nillable="true" type="xsd:string"/>
+       <element name="microChargingFlag" nillable="true" type="xsd:string"/>
+       <element name="nationality" nillable="true" type="xsd:string"/>
+       <element name="notifyHLR" nillable="true" type="xsd:string"/>
+       <element name="phoneNumber" nillable="true" type="xsd:string"/>
+       <element name="pwd" nillable="true" type="xsd:string"/>
+       <element name="recommendNumber" nillable="true" type="xsd:string"/>
+       <element name="renewalMode" nillable="true" type="xsd:string"/>
+       <element name="resourceCode" nillable="true" type="xsd:string"/>
+       <element name="resourceID" nillable="true" type="xsd:string"/>
+       <element name="resourceServiceType" nillable="true" type="xsd:string"/>
+       <element name="resourceType" nillable="true" type="xsd:string"/>
+       <element name="serviceID" nillable="true" type="xsd:string"/>
+       <element name="sex" nillable="true" type="xsd:string"/>
+       <element name="toneDiscount" nillable="true" type="xsd:string"/>
+       <element name="tonePrice" nillable="true" type="xsd:string"/>
+       <element name="toneValidDuration" nillable="true" type="xsd:string"/>
+       <element name="traceUniqueID" nillable="true" type="xsd:string"/>
+       <element name="tradeMark" nillable="true" type="xsd:string"/>
+       <element name="triggerKey" nillable="true" type="xsd:string"/>
+       <element name="triggerPhonenumber" nillable="true" type="xsd:string"/>
+       <element name="triggerType" nillable="true" type="xsd:string"/>
+       <element name="userType" nillable="true" type="xsd:string"/>
+       <element name="validateCode" nillable="true" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="QueryUserEvt">
+    <complexContent>
+     <extension base="tns3:BaseQueryEvt">
+      <sequence>
+       <element name="brand" nillable="true" type="xsd:string"/>
+       <element name="isArrear" nillable="true" type="xsd:string"/>
+       <element name="maxRegisterTime" nillable="true" type="xsd:string"/>
+       <element name="minRegisterTime" nillable="true" type="xsd:string"/>
+       <element name="moodModeID" nillable="true" type="xsd:string"/>
+       <element name="orderBy" nillable="true" type="xsd:string"/>
+       <element name="orderType" nillable="true" type="xsd:string"/>
+       <element name="phoneNumber" nillable="true" type="xsd:string"/>
+       <element name="region" nillable="true" type="xsd:string"/>
+       <element name="serviceID" nillable="true" type="xsd:string"/>
+       <element name="status" nillable="true" type="xsd:string"/>
+       <element name="subCosID" nillable="true" type="xsd:string"/>
+       <element name="type" nillable="true" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+  <schema targetNamespace="http://info.ivas.huawei.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="ServiceOrder">
+    <sequence>
+     <element name="brandModifyDate" nillable="true" type="xsd:string"/>
+     <element name="chargeMonthfeeAmount" nillable="true" type="xsd:string"/>
+     <element name="chargeMonthfeeBeginTime" nillable="true" type="xsd:string"/>
+     <element name="chargeMonthfeeEndTime" nillable="true" type="xsd:string"/>
+     <element name="endTime" nillable="true" type="xsd:string"/>
+     <element name="groupID" nillable="true" type="xsd:string"/>
+     <element name="initialCreateTime" nillable="true" type="xsd:string"/>
+     <element name="isArrear" nillable="true" type="xsd:string"/>
+     <element name="monthFeeEndDay" nillable="true" type="xsd:string"/>
+     <element name="operator" nillable="true" type="xsd:string"/>
+     <element name="orderID" nillable="true" type="xsd:string"/>
+     <element name="phoneNumber" nillable="true" type="xsd:string"/>
+     <element name="price" nillable="true" type="xsd:string"/>
+     <element name="registerTime" nillable="true" type="xsd:string"/>
+     <element name="renewMode" nillable="true" type="xsd:string"/>
+     <element name="reserveTime" nillable="true" type="xsd:string"/>
+     <element name="serviceBrand" nillable="true" type="xsd:string"/>
+     <element name="serviceID" nillable="true" type="xsd:string"/>
+     <element name="serviceStatus" nillable="true" type="xsd:string"/>
+     <element name="startTime" nillable="true" type="xsd:string"/>
+     <element name="upstatusTime" nillable="true" type="xsd:string"/>
+     <element name="userDownTime" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="UserInfo">
+    <sequence>
+     <element name="accountType" nillable="true" type="xsd:string"/>
+     <element name="bgTone" nillable="true" type="xsd:string"/>
+     <element name="brand" nillable="true" type="xsd:string"/>
+     <element name="brandName" nillable="true" type="xsd:string"/>
+     <element name="chargeMonthfeeAmount" nillable="true" type="xsd:string"/>
+     <element name="chargeMonthfeeBeginTime" nillable="true" type="xsd:string"/>
+     <element name="chargeMonthfeeEndTime" nillable="true" type="xsd:string"/>
+     <element name="city" nillable="true" type="xsd:string"/>
+     <element name="corpCode" nillable="true" type="xsd:string"/>
+     <element name="corpID" nillable="true" type="xsd:string"/>
+     <element name="corpName" nillable="true" type="xsd:string"/>
+     <element name="currentLocal" nillable="true" type="xsd:string"/>
+     <element name="dateOfBirth" nillable="true" type="xsd:string"/>
+     <element name="email" nillable="true" type="xsd:string"/>
+     <element name="firstFailTime" nillable="true" type="xsd:string"/>
+     <element name="firstName" nillable="true" type="xsd:string"/>
+     <element name="groupID" nillable="true" type="xsd:string"/>
+     <element name="httpCallBackFlag" nillable="true" type="xsd:string"/>
+     <element name="idCard" nillable="true" type="xsd:string"/>
+     <element name="initialCreateTime" nillable="true" type="xsd:string"/>
+     <element name="isArrear" nillable="true" type="xsd:string"/>
+     <element name="isInvalidUser" nillable="true" type="xsd:string"/>
+     <element name="isLocked" nillable="true" type="xsd:string"/>
+     <element name="isUseCopy" nillable="true" type="xsd:string"/>
+     <element name="languageID" nillable="true" type="xsd:string"/>
+     <element name="lastName" nillable="true" type="xsd:string"/>
+     <element name="lockReason" nillable="true" type="xsd:string"/>
+     <element name="lockType" nillable="true" type="xsd:string"/>
+     <element name="lockedTime" nillable="true" type="xsd:string"/>
+     <element name="lrn" nillable="true" type="xsd:string"/>
+     <element name="monthFeeEndDay" nillable="true" type="xsd:string"/>
+     <element name="moodModeID" nillable="true" type="xsd:string"/>
+     <element name="multiAccountValue" nillable="true" type="xsd:string"/>
+     <element name="musicClubId" nillable="true" type="xsd:string"/>
+     <element name="musicClubPoints" nillable="true" type="xsd:string"/>
+     <element name="name" nillable="true" type="xsd:string"/>
+     <element name="nationality" nillable="true" type="xsd:string"/>
+     <element name="netKind" nillable="true" type="xsd:string"/>
+     <element name="operator" nillable="true" type="xsd:string"/>
+     <element name="phoneNumber" nillable="true" type="xsd:string"/>
+     <element name="playMode" nillable="true" type="xsd:string"/>
+     <element name="preNoticeFlag" nillable="true" type="xsd:string"/>
+     <element name="pwd" nillable="true" type="xsd:string"/>
+     <element name="region" nillable="true" type="xsd:string"/>
+     <element name="regionName" nillable="true" type="xsd:string"/>
+     <element name="registerTime" nillable="true" type="xsd:string"/>
+     <element name="renewMode" nillable="true" type="xsd:string"/>
+     <element name="reserveTime" nillable="true" type="xsd:string"/>
+     <element name="serviceOrders" nillable="true" type="impl:ArrayOf_tns5_ServiceOrder"/>
+     <element name="sex" nillable="true" type="xsd:string"/>
+     <element name="status" nillable="true" type="xsd:string"/>
+     <element name="subCosID" nillable="true" type="xsd:string"/>
+     <element name="totalLoyaltyPonints" nillable="true" type="xsd:string"/>
+     <element name="type" nillable="true" type="xsd:string"/>
+     <element name="unlimitFlag" nillable="true" type="xsd:string"/>
+     <element name="updateStatusTime" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema targetNamespace="http://response.usermanage.ivas.huawei.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="QueryUserResp">
+    <complexContent>
+     <extension base="tns3:BaseQueryResp">
+      <sequence>
+       <element name="userInfos" nillable="true" type="impl:ArrayOf_tns5_UserInfo"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <message name="subscribeResponse">
+
+      <part name="subscribeReturn" type="tns3:Response"/>
+
+   </message>
+
+   <message name="subscribeRequest">
+
+      <part name="event" type="tns2:SubscribeEvt"/>
+
+   </message>
+
+   <message name="queryResponse">
+
+      <part name="queryReturn" type="tns4:QueryUserResp"/>
+
+   </message>
+
+   <message name="queryRequest">
+
+      <part name="event" type="tns2:QueryUserEvt"/>
+
+   </message>
+
+   <portType name="UserManage">
+
+      <operation name="subscribe" parameterOrder="event">
+
+         <input message="impl:subscribeRequest" name="subscribeRequest"/>
+
+         <output message="impl:subscribeResponse" name="subscribeResponse"/>
+
+      </operation>
+
+      <operation name="query" parameterOrder="event">
+
+         <input message="impl:queryRequest" name="queryRequest"/>
+
+         <output message="impl:queryResponse" name="queryResponse"/>
+
+      </operation>
+
+   </portType>
+
+   <binding name="UserManageSoapBinding" type="impl:UserManage">
+
+      <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <operation name="subscribe">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <input name="subscribeRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://usermanage.ivas.huawei.com" use="encoded"/>
+
+         </input>
+
+         <output name="subscribeResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://usermanage.ivas.huawei.com" use="encoded"/>
+
+         </output>
+
+      </operation>
+
+      <operation name="query">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <input name="queryRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://usermanage.ivas.huawei.com" use="encoded"/>
+
+         </input>
+
+         <output name="queryResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://usermanage.ivas.huawei.com" use="encoded"/>
+
+         </output>
+
+      </operation>
+
+   </binding>
+
+   <service name="UserManageService">
+
+      <port binding="impl:UserManageSoapBinding" name="UserManage">
+
+         <wsdlsoap:address location="http://10.71.62.14:28080/jboss-net/services/UserManage"/>
+
+      </port>
+
+   </service>
+
+</definitions>

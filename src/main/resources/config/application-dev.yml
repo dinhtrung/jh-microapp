@@ -43,7 +43,7 @@ spring:
     data:
         mongodb:
             uri: mongodb://localhost:27017
-            database: app
+            database: rbt
     mail:
         host: localhost
         port: 25

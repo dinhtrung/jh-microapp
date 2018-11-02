@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions targetNamespace="http://toneprovide.ivas.huawei.com" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://toneprovide.ivas.huawei.com" xmlns:intf="http://toneprovide.ivas.huawei.com" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns2="http://event.toneprovide.ivas.huawei.com" xmlns:tns3="http://ivas.huawei.com" xmlns:tns4="http://response.toneprovide.ivas.huawei.com" xmlns:tns5="http://info.ivas.huawei.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+ <wsdl:types>
+  <schema targetNamespace="http://ivas.huawei.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="BaseEvt">
+    <sequence>
+     <element name="portalAccount" nillable="true" type="xsd:string"/>
+     <element name="portalPwd" nillable="true" type="xsd:string"/>
+     <element name="portalType" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="BaseQueryEvt">
+    <complexContent>
+     <extension base="tns3:BaseEvt">
+      <sequence>
+       <element name="endRecordNum" nillable="true" type="xsd:string"/>
+       <element name="queryType" nillable="true" type="xsd:string"/>
+       <element name="startRecordNum" nillable="true" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="Response">
+    <sequence>
+     <element name="eventClassName" nillable="true" type="xsd:string"/>
+     <element name="operationID" type="xsd:long"/>
+     <element name="resultCode" type="xsd:int"/>
+     <element name="resultInfo" nillable="true" type="xsd:string"/>
+     <element name="returnCode" nillable="true" type="xsd:string"/>
+     <element name="transactionID" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="BaseQueryResp">
+    <complexContent>
+     <extension base="tns3:Response">
+      <sequence>
+       <element name="recordSum" nillable="true" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+  <schema targetNamespace="http://toneprovide.ivas.huawei.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="ArrayOf_xsd_string">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="xsd:string[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+   <complexType name="ArrayOf_tns5_ToneInfo">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="tns5:ToneInfo[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+  </schema>
+  <schema targetNamespace="http://event.toneprovide.ivas.huawei.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="QueryToneEvt">
+    <complexContent>
+     <extension base="tns3:BaseQueryEvt">
+      <sequence>
+       <element name="adminType" nillable="true" type="xsd:string"/>
+       <element name="allowedChannel" nillable="true" type="impl:ArrayOf_xsd_string"/>
+       <element name="approveType" nillable="true" type="xsd:string"/>
+       <element name="askType" nillable="true" type="xsd:string"/>
+       <element name="beginApproveTime" nillable="true" type="xsd:string"/>
+       <element name="beginUpdateTime" nillable="true" type="xsd:string"/>
+       <element name="beginUploadTime" nillable="true" type="xsd:string"/>
+       <element name="category" nillable="true" type="xsd:string"/>
+       <element name="companyID" nillable="true" type="xsd:string"/>
+       <element name="copyRightType" nillable="true" type="xsd:string"/>
+       <element name="corpID" nillable="true" type="xsd:string"/>
+       <element name="cutFlag" nillable="true" type="xsd:string"/>
+       <element name="endApproveTime" nillable="true" type="xsd:string"/>
+       <element name="endUpdateTime" nillable="true" type="xsd:string"/>
+       <element name="endUploadTime" nillable="true" type="xsd:string"/>
+       <element name="language" nillable="true" type="xsd:string"/>
+       <element name="maxOrderTimes" nillable="true" type="xsd:string"/>
+       <element name="maxPrice" nillable="true" type="xsd:string"/>
+       <element name="minOrderTimes" nillable="true" type="xsd:string"/>
+       <element name="minPrice" nillable="true" type="xsd:string"/>
+       <element name="orderBy" nillable="true" type="xsd:string"/>
+       <element name="orderType" nillable="true" type="xsd:string"/>
+       <element name="queryMode" nillable="true" type="xsd:string"/>
+       <element name="relativeTime" nillable="true" type="xsd:string"/>
+       <element name="resourceServiceType" nillable="true" type="xsd:string"/>
+       <element name="serviceID" nillable="true" type="xsd:string"/>
+       <element name="singerName" nillable="true" type="xsd:string"/>
+       <element name="singerNameLetter" nillable="true" type="xsd:string"/>
+       <element name="singerSex" nillable="true" type="xsd:string"/>
+       <element name="status" nillable="true" type="xsd:string"/>
+       <element name="subInfoName" nillable="true" type="xsd:string"/>
+       <element name="subInfoValue" nillable="true" type="xsd:string"/>
+       <element name="timeFlag" nillable="true" type="xsd:string"/>
+       <element name="toneCode" nillable="true" type="xsd:string"/>
+       <element name="toneID" nillable="true" type="xsd:string"/>
+       <element name="toneName" nillable="true" type="xsd:string"/>
+       <element name="toneNameLetter" nillable="true" type="xsd:string"/>
+       <element name="uploadID" nillable="true" type="xsd:string"/>
+       <element name="uploadType" nillable="true" type="xsd:string"/>
+       <element name="validDayBeginTime" nillable="true" type="xsd:string"/>
+       <element name="validDayEndTime" nillable="true" type="xsd:string"/>
+       <element name="validDayType" nillable="true" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+  <schema targetNamespace="http://info.ivas.huawei.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="ToneInfo">
+    <sequence>
+      <element name="accountType" nillable="true" type="xsd:string"/>
+      <element name="adminAct" nillable="true" type="xsd:string"/>
+      <element name="aggregatorShare" nillable="true" type="xsd:string"/>
+      <element name="aipTonePreListenAddress" nillable="true" type="xsd:string"/>
+      <element name="aipTonePreListenURL" nillable="true" type="xsd:string"/>
+      <element name="allowedChannel" nillable="true" type="impl:ArrayOf_xsd_string"/>
+      <element name="askType" nillable="true" type="xsd:string"/>
+      <element name="availableDateTime" nillable="true" type="xsd:string"/>
+      <element name="beginTime" nillable="true" type="xsd:string"/>
+      <element name="category" nillable="true" type="xsd:string"/>
+      <element name="categoryName" nillable="true" type="xsd:string"/>
+      <element name="changeTime" nillable="true" type="xsd:string"/>
+      <element name="chargeProductID" nillable="true" type="xsd:string"/>
+      <element name="checkTime" nillable="true" type="xsd:string"/>
+      <element name="contentLanguage" nillable="true" type="xsd:string"/>
+      <element name="contractPrice" nillable="true" type="xsd:string"/>
+      <element name="corpCode" nillable="true" type="xsd:string"/>
+      <element name="corpName" nillable="true" type="xsd:string"/>
+      <element name="cpCode" nillable="true" type="xsd:string"/>
+      <element name="cpName" nillable="true" type="xsd:string"/>
+      <element name="cpRevSharePercentage" nillable="true" type="xsd:string"/>
+      <element name="cpType" nillable="true" type="xsd:string"/>
+      <element name="creditDownload" nillable="true" type="xsd:string"/>
+      <element name="cutFlag" nillable="true" type="xsd:string"/>
+      <element name="dailyChargeFlag" nillable="true" type="xsd:string"/>
+      <element name="deviceAndUrl" nillable="true" type="xsd:string"/>
+      <element name="diyUserPhoneNumber" nillable="true" type="xsd:string"/>
+      <element name="downTime" nillable="true" type="xsd:string"/>
+      <element name="enabledDate" nillable="true" type="xsd:string"/>
+      <element name="endOffset" nillable="true" type="xsd:string"/>
+      <element name="endTime" nillable="true" type="xsd:string"/>
+      <element name="extendAbsoluteDateFlag" nillable="true" type="xsd:string"/>
+      <element name="fileSyncInterval" nillable="true" type="xsd:string"/>
+      <element name="fileSyncPath" nillable="true" type="xsd:string"/>
+      <element name="freeOrderTimes" nillable="true" type="xsd:string"/>
+      <element name="ftpPassword" nillable="true" type="xsd:string"/>
+      <element name="ftpUserName" nillable="true" type="xsd:string"/>
+      <element name="grid" nillable="true" type="xsd:string"/>
+      <element name="groupID" nillable="true" type="xsd:string"/>
+      <element name="hdToneAddress" nillable="true" type="xsd:string"/>
+      <element name="hdTonePath" nillable="true" type="xsd:string"/>
+      <element name="inboxStatus" nillable="true" type="xsd:string"/>
+      <element name="index" nillable="true" type="xsd:string"/>
+      <element name="info" nillable="true" type="xsd:string"/>
+      <element name="initialDownTime" nillable="true" type="xsd:string"/>
+      <element name="isDebtCharge" nillable="true" type="xsd:string"/>
+      <element name="isMicroCharge" nillable="true" type="xsd:string"/>
+      <element name="isrc" nillable="true" type="xsd:string"/>
+      <element name="keyword" nillable="true" type="xsd:string"/>
+      <element name="language" nillable="true" type="xsd:string"/>
+      <element name="lastChargedDuration" nillable="true" type="xsd:string"/>
+      <element name="lastChargedPrice" nillable="true" type="xsd:string"/>
+      <element name="lastRenewTryTime" nillable="true" type="xsd:string"/>
+      <element name="lyricCompanyID" nillable="true" type="xsd:string"/>
+      <element name="lyricValidDay" nillable="true" type="xsd:string"/>
+      <element name="maxDownloadLimit" nillable="true" type="xsd:string"/>
+      <element name="merchantID" nillable="true" type="xsd:string"/>
+      <element name="modifyID" nillable="true" type="xsd:string"/>
+      <element name="monthFeeEndDay" nillable="true" type="xsd:string"/>
+      <element name="multiAccountValue" nillable="true" type="xsd:string"/>
+      <element name="musicID" nillable="true" type="xsd:string"/>
+      <element name="nextMonthStartDate" nillable="true" type="xsd:string"/>
+      <element name="offset" nillable="true" type="xsd:string"/>
+      <element name="operator" nillable="true" type="xsd:string"/>
+      <element name="orderInfo" nillable="true" type="xsd:string"/>
+      <element name="orderTimes" nillable="true" type="xsd:string"/>
+      <element name="passID" nillable="true" type="xsd:string"/>
+      <element name="personID" nillable="true" type="xsd:string"/>
+      <element name="phoneNumber" nillable="true" type="xsd:string"/>
+      <element name="plusUserPhoneNumber" nillable="true" type="xsd:string"/>
+      <element name="price" nillable="true" type="xsd:string"/>
+      <element name="priceGroupID" nillable="true" type="xsd:string"/>
+      <element name="productID" nillable="true" type="xsd:string"/>
+      <element name="productOrderKey" nillable="true" type="xsd:string"/>
+      <element name="rate" nillable="true" type="xsd:string"/>
+      <element name="reOrderMode" nillable="true" type="xsd:string"/>
+      <element name="reason" nillable="true" type="xsd:string"/>
+      <element name="recordCompanyID" nillable="true" type="xsd:string"/>
+      <element name="recordValidDay" nillable="true" type="xsd:string"/>
+      <element name="rejectReason" nillable="true" type="xsd:string"/>
+      <element name="relativeTime" nillable="true" type="xsd:string"/>
+      <element name="remark" nillable="true" type="xsd:string"/>
+      <element name="renewContinueCount" nillable="true" type="xsd:string"/>
+      <element name="renewFailureCount" nillable="true" type="xsd:string"/>
+      <element name="renewFlag" nillable="true" type="xsd:string"/>
+      <element name="replaceCount" nillable="true" type="xsd:string"/>
+      <element name="requestDiscount" nillable="true" type="xsd:string"/>
+      <element name="resourceServiceType" nillable="true" type="xsd:string"/>
+      <element name="resourceType" nillable="true" type="xsd:string"/>
+      <element name="retryCount" nillable="true" type="xsd:string"/>
+      <element name="serviceID" nillable="true" type="xsd:string"/>
+      <element name="setTimes" nillable="true" type="xsd:string"/>
+      <element name="settingToneStatus" nillable="true" type="xsd:string"/>
+      <element name="shortCode" nillable="true" type="xsd:string"/>
+      <element name="singerInfos" nillable="true" type="xsd:string"/>
+      <element name="singerName" nillable="true" type="xsd:string"/>
+      <element name="singerNameAddress" nillable="true" type="xsd:string"/>
+      <element name="singerNameLetter" nillable="true" type="xsd:string"/>
+      <element name="singerNamePath" nillable="true" type="xsd:string"/>
+      <element name="singerSex" nillable="true" type="xsd:string"/>
+      <element name="smAccessCode" nillable="true" type="xsd:string"/>
+      <element name="status" nillable="true" type="xsd:string"/>
+      <element name="streamingURL" nillable="true" type="xsd:string"/>
+      <element name="tableType" nillable="true" type="xsd:string"/>
+      <element name="tariffPrice" nillable="true" type="xsd:string"/>
+      <element name="taxisIndex" nillable="true" type="xsd:string"/>
+      <element name="taxisToneDownInfo" nillable="true" type="xsd:string"/>
+      <element name="toneAddress" nillable="true" type="xsd:string"/>
+      <element name="toneCode" nillable="true" type="xsd:string"/>
+      <element name="toneCodeLong" nillable="true" type="xsd:string"/>
+      <element name="toneID" nillable="true" type="xsd:string"/>
+      <element name="toneName" nillable="true" type="xsd:string"/>
+      <element name="toneNameAddress" nillable="true" type="xsd:string"/>
+      <element name="toneNameLetter" nillable="true" type="xsd:string"/>
+      <element name="toneNamePath" nillable="true" type="xsd:string"/>
+      <element name="tonePath" nillable="true" type="xsd:string"/>
+      <element name="tonePreListenAddress" nillable="true" type="xsd:string"/>
+      <element name="tonePreListenPath" nillable="true" type="xsd:string"/>
+      <element name="toneValidDay" nillable="true" type="xsd:string"/>
+      <element name="totalPrice" nillable="true" type="xsd:string"/>
+      <element name="tuneCompanyID" nillable="true" type="xsd:string"/>
+      <element name="tuneValidDay" nillable="true" type="xsd:string"/>
+      <element name="unlimitFlag" nillable="true" type="xsd:string"/>
+      <element name="updateTime" nillable="true" type="xsd:string"/>
+      <element name="uploadTime" nillable="true" type="xsd:string"/>
+      <element name="uploadType" nillable="true" type="xsd:string"/>
+      <element name="userConsent" nillable="true" type="xsd:string"/>
+      <element name="wapImagePath" nillable="true" type="xsd:string"/>
+      <element name="webImagePath" nillable="true" type="xsd:string"/>
+      <element name="webTonePreListenAddress" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema targetNamespace="http://response.toneprovide.ivas.huawei.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="QueryToneResp">
+    <complexContent>
+     <extension base="tns3:BaseQueryResp">
+      <sequence>
+       <element name="queryToneInfos" nillable="true" type="impl:ArrayOf_tns5_ToneInfo"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <message name="queryToneRequest">
+
+      <part name="event" type="tns2:QueryToneEvt"/>
+
+   </message>
+
+   <message name="queryToneResponse">
+
+      <part name="queryToneReturn" type="tns4:QueryToneResp"/>
+
+   </message>
+
+   <portType name="ToneProvide">
+
+      <operation name="queryTone" parameterOrder="event">
+
+         <input message="impl:queryToneRequest" name="queryToneRequest"/>
+
+         <output message="impl:queryToneResponse" name="queryToneResponse"/>
+
+      </operation>
+
+   </portType>
+
+   <binding name="ToneProvideSoapBinding" type="impl:ToneProvide">
+
+      <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <operation name="queryTone">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <input name="queryToneRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://toneprovide.ivas.huawei.com" use="encoded"/>
+
+         </input>
+
+         <output name="queryToneResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://toneprovide.ivas.huawei.com" use="encoded"/>
+
+         </output>
+
+      </operation>
+
+   </binding>
+
+   <service name="ToneProvideService">
+
+      <port binding="impl:ToneProvideSoapBinding" name="ToneProvide">
+
+		 <wsdlsoap:address location="http://10.71.62.14:28080/jboss-net/services/ToneProvide"/>
+
+      </port>
+
+   </service>
+
+</definitions>

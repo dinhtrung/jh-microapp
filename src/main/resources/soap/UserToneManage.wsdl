@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions targetNamespace="http://usertonemanage.ivas.huawei.com" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://usertonemanage.ivas.huawei.com" xmlns:intf="http://usertonemanage.ivas.huawei.com" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns2="http://event.usertonemanage.ivas.huawei.com" xmlns:tns3="http://ivas.huawei.com" xmlns:tns4="http://response.usertonemanage.ivas.huawei.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+ <wsdl:types>
+  <schema targetNamespace="http://ivas.huawei.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="BaseEvt">
+    <sequence>
+     <element name="portalAccount" nillable="true" type="xsd:string"/>
+     <element name="portalPwd" nillable="true" type="xsd:string"/>
+     <element name="portalType" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="BaseUpdateEvt">
+    <complexContent>
+     <extension base="tns3:BaseEvt">
+      <sequence>
+       <element name="moduleCode" nillable="true" type="xsd:string"/>
+       <element name="role" nillable="true" type="xsd:string"/>
+       <element name="roleCode" nillable="true" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="Response">
+    <sequence>
+     <element name="eventClassName" nillable="true" type="xsd:string"/>
+     <element name="operationID" type="xsd:long"/>
+     <element name="resultCode" type="xsd:int"/>
+     <element name="resultInfo" nillable="true" type="xsd:string"/>
+     <element name="returnCode" nillable="true" type="xsd:string"/>
+     <element name="transactionID" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema targetNamespace="http://usertonemanage.ivas.huawei.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="ArrayOf_xsd_string">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="xsd:string[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+   <complexType name="ArrayOf_ns4_SettingInfo">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="tns4:SettingInfo[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+   <complexType name="ArrayOf_ns3_Response">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="tns3:Response[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+  </schema>
+  <schema targetNamespace="http://event.usertonemanage.ivas.huawei.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="OrderToneEvt">
+    <complexContent>
+     <extension base="tns3:BaseUpdateEvt">
+      <sequence>
+       <element name="additionalParamName" nillable="true" type="impl:ArrayOf_xsd_string"/>
+       <element name="additionalParamValue" nillable="true" type="impl:ArrayOf_xsd_string"/>
+       <element name="chargeFeeMode" nillable="true" type="xsd:string"/>
+       <element name="contentID" nillable="true" type="xsd:string"/>
+       <element name="couponCode" nillable="true" type="xsd:string"/>
+       <element name="discount" nillable="true" type="xsd:string"/>
+       <element name="fromFlag" nillable="true" type="xsd:string"/>
+       <element name="groupID" nillable="true" type="xsd:string"/>
+       <element name="keyword" nillable="true" type="xsd:string"/>
+       <element name="merchantID" nillable="true" type="xsd:string"/>
+       <element name="partnerID" nillable="true" type="xsd:string"/>
+       <element name="passID" nillable="true" type="xsd:string"/>
+       <element name="phoneNumber" nillable="true" type="xsd:string"/>
+       <element name="price" nillable="true" type="xsd:string"/>
+       <element name="productID" nillable="true" type="xsd:string"/>
+       <element name="rankType" nillable="true" type="xsd:string"/>
+       <element name="recommendNumber" nillable="true" type="xsd:string"/>
+       <element name="reorderMode" nillable="true" type="xsd:string"/>
+       <element name="resourceCode" nillable="true" type="xsd:string"/>
+       <element name="resourceID" nillable="true" type="xsd:string"/>
+       <element name="resourceType" nillable="true" type="xsd:string"/>
+       <element name="serviceID" nillable="true" type="xsd:string"/>
+       <element name="supportDailyCharging" nillable="true" type="xsd:string"/>
+       <element name="toneValidDay" nillable="true" type="xsd:string"/>
+       <element name="traceUniqueID" nillable="true" type="xsd:string"/>
+       <element name="tradeID" nillable="true" type="xsd:string"/>
+       <element name="validDuration" nillable="true" type="xsd:string"/>
+       <element name="voucherID" nillable="true" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="QuerySettingEvt">
+    <complexContent>
+     <extension base="tns3:BaseEvt">
+      <sequence>
+        <element name="calledUserID" nillable="true" type="xsd:string"/>
+        <element name="calledUserType" nillable="true" type="xsd:string"/>
+        <element name="phoneState" nillable="true" type="xsd:string"/>
+        <element name="productID" nillable="true" type="xsd:string"/>
+        <element name="setMode" nillable="true" type="xsd:string"/>
+        <element name="setType" nillable="true" type="xsd:string"/>
+        <element name="timeType" nillable="true" type="xsd:string"/>
+        <element name="toneType" nillable="true" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="DelInboxToneEvt">
+    <complexContent>
+     <extension base="tns3:BaseUpdateEvt">
+      <sequence>
+       <element name="merchantID" nillable="true" type="xsd:string"/>
+       <element name="personId" nillable="true" type="xsd:string"/>
+       <element name="phoneNumber" nillable="true" type="xsd:string"/>
+       <element name="resourceCode" nillable="true" type="xsd:string"/>
+       <element name="resourceID" nillable="true" type="xsd:string"/>
+       <element name="resourceType" nillable="true" type="xsd:string"/>
+       <element name="serviceID" nillable="true" type="xsd:string"/>
+       <element name="transactionID" nillable="true" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="AddToneBoxEvt">
+    <complexContent>
+     <extension base="tns3:BaseUpdateEvt">
+      <sequence>
+       <element name="aggregatorShare" nillable="true" type="xsd:string"/>
+       <element name="allowedChannel" nillable="true" type="impl:ArrayOf_xsd_string"/>
+       <element name="canSplit" nillable="true" type="xsd:string"/>
+       <element name="canUpdate" nillable="true" type="xsd:string"/>
+       <element name="catalogID" nillable="true" type="xsd:string"/>
+       <element name="cpRevSharePercentage" nillable="true" type="xsd:string"/>
+       <element name="cpType" nillable="true" type="xsd:string"/>
+       <element name="description" nillable="true" type="xsd:string"/>
+       <element name="enabledDate" nillable="true" type="xsd:string"/>
+       <element name="feeType" nillable="true" type="xsd:string"/>
+       <element name="isMixMusicBox" nillable="true" type="xsd:string"/>
+       <element name="languageID" nillable="true" type="xsd:string"/>
+       <element name="loopToneType" nillable="true" type="xsd:string"/>
+       <element name="maxDownloadLimit" nillable="true" type="xsd:string"/>
+       <element name="name" nillable="true" type="xsd:string"/>
+       <element name="objectCode" nillable="true" type="xsd:string"/>
+       <element name="objectRole" nillable="true" type="xsd:string"/>
+       <element name="price" nillable="true" type="xsd:string"/>
+       <element name="priceGroupID" nillable="true" type="xsd:string"/>
+       <element name="relativeTime" nillable="true" type="xsd:string"/>
+       <element name="renewFlag" nillable="true" type="xsd:string"/>
+       <element name="serviceID" nillable="true" type="xsd:string"/>
+       <element name="toneBoxCode" nillable="true" type="xsd:string"/>
+       <element name="toneCode" nillable="true" type="impl:ArrayOf_xsd_string"/>
+       <element name="toneEndOffsets" nillable="true" type="impl:ArrayOf_xsd_string"/>
+       <element name="toneFileNames" nillable="true" type="impl:ArrayOf_xsd_string"/>
+       <element name="toneID" nillable="true" type="impl:ArrayOf_xsd_string"/>
+       <element name="toneOffsets" nillable="true" type="impl:ArrayOf_xsd_string"/>
+       <element name="toneType" nillable="true" type="impl:ArrayOf_xsd_string"/>
+       <element name="toneValidDay" nillable="true" type="xsd:string"/>
+       <element name="type" nillable="true" type="xsd:string"/>
+       <element name="uploadType" nillable="true" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="SetToneEvt">
+    <complexContent>
+     <extension base="tns3:BaseUpdateEvt">
+      <sequence>
+       <element name="calledUserID" nillable="true" type="xsd:string"/>
+       <element name="calledUserType" nillable="true" type="xsd:string"/>
+       <element name="callerNumber" nillable="true" type="xsd:string"/>
+       <element name="description" nillable="true" type="xsd:string"/>
+       <element name="endTime" nillable="true" type="xsd:string"/>
+       <element name="loopType" nillable="true" type="xsd:string"/>
+       <element name="moodModeID" nillable="true" type="xsd:string"/>
+       <element name="overlayFlag" nillable="true" type="xsd:string"/>
+       <element name="phoneState" nillable="true" type="xsd:string"/>
+       <element name="productID" nillable="true" type="xsd:string"/>
+       <element name="resourceType" nillable="true" type="xsd:string"/>
+       <element name="setMode" nillable="true" type="xsd:string"/>
+       <element name="setType" nillable="true" type="xsd:string"/>
+       <element name="startTime" nillable="true" type="xsd:string"/>
+       <element name="timeType" nillable="true" type="xsd:string"/>
+       <element name="toneBoxID" nillable="true" type="xsd:string"/>
+       <element name="toneType" nillable="true" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+  <schema targetNamespace="http://response.usertonemanage.ivas.huawei.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="AddToneBoxResp">
+    <complexContent>
+     <extension base="tns3:Response">
+      <sequence>
+       <element name="toneBoxCode" nillable="true" type="xsd:string"/>
+       <element name="toneBoxID" nillable="true" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="SettingInfo">
+    <complexContent>
+     <extension base="tns3:Response">
+      <sequence>
+       <element name="callerName" nillable="true" type="xsd:string"/>
+       <element name="callerNumber" nillable="true" type="xsd:string"/>
+       <element name="description" nillable="true" type="xsd:string"/>
+       <element name="endTime" nillable="true" type="xsd:string"/>
+       <element name="loopType" nillable="true" type="xsd:string"/>
+       <element name="moodModeID" nillable="true" type="xsd:string"/>
+       <element name="offset" nillable="true" type="xsd:string"/>
+       <element name="operator" nillable="true" type="xsd:string"/>
+       <element name="phoneState" nillable="true" type="xsd:string"/>
+       <element name="priority" nillable="true" type="xsd:string"/>
+       <element name="productID" nillable="true" type="xsd:string"/>
+       <element name="resourceType" nillable="true" type="xsd:string"/>
+       <element name="setMode" nillable="true" type="xsd:string"/>
+       <element name="setTime" nillable="true" type="xsd:string"/>
+       <element name="setType" nillable="true" type="xsd:string"/>
+       <element name="settingID" nillable="true" type="xsd:string"/>
+       <element name="startTime" nillable="true" type="xsd:string"/>
+       <element name="status" nillable="true" type="xsd:string"/>
+       <element name="timeType" nillable="true" type="xsd:string"/>
+       <element name="toneBoxID" nillable="true" type="xsd:string"/>
+       <element name="toneType" nillable="true" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="SetToneResp">
+    <complexContent>
+     <extension base="tns3:Response">
+      <sequence>
+       <element name="settingID" nillable="true" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="QuerySettingResp">
+    <complexContent>
+     <extension base="tns3:Response">
+      <sequence>
+       <element name="recordSum" nillable="true" type="xsd:string"/>
+       <element name="settingInfos" nillable="true" type="impl:ArrayOf_ns4_SettingInfo"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="delInboxToneResponse">
+    <complexContent>
+      <sequence>
+        <element name="delInboxToneReturn" nillable="true" type="impl:ArrayOf_ns3_Response"/>
+      </sequence>
+    </complexContent>
+   </complexType>
+
+
+
+
+  </schema>
+ </wsdl:types>
+
+   <message name="addToneBoxRequest">
+
+      <part name="event" type="tns2:AddToneBoxEvt"/>
+
+   </message>
+
+   <message name="addToneBoxResponse">
+
+      <part name="addToneBoxReturn" type="tns4:AddToneBoxResp"/>
+
+   </message>
+
+   <message name="orderToneResponse">
+
+      <part name="orderToneReturn" type="tns3:Response"/>
+
+   </message>
+
+   <message name="orderToneRequest">
+
+      <part name="event" type="tns2:OrderToneEvt"/>
+
+   </message>
+
+   <message name="setToneRequest">
+
+      <part name="event" type="tns2:SetToneEvt"/>
+
+   </message>
+   <message name="setToneResponse">
+
+      <part name="setToneReturn" type="tns4:SetToneResp"/>
+
+   </message>
+
+   <message name="querySettingRequest">
+
+      <part name="event" type="tns2:QuerySettingEvt"/>
+
+   </message>
+   <message name="querySettingResponse">
+
+      <part name="querySettingReturn" type="tns4:QuerySettingResp"/>
+
+   </message>
+
+   <message name="delInboxToneRequest">
+
+      <part name="event" type="tns2:DelInboxToneEvt"/>
+
+   </message>
+
+   <message name="delInboxToneResponse">
+
+      <part name="delInboxToneResponse" type="tns4:delInboxToneResponse"/>
+
+   </message>
+
+
+
+   <portType name="UserToneManage">
+
+      <operation name="orderTone" parameterOrder="event">
+
+         <input message="impl:orderToneRequest" name="orderToneRequest"/>
+
+         <output message="impl:orderToneResponse" name="orderToneResponse"/>
+
+      </operation>
+
+      <operation name="addToneBox" parameterOrder="event">
+
+         <input message="impl:addToneBoxRequest" name="addToneBoxRequest"/>
+
+         <output message="impl:addToneBoxResponse" name="addToneBoxResponse"/>
+
+      </operation>
+
+      <operation name="setTone" parameterOrder="event">
+
+         <input message="impl:setToneRequest" name="setToneRequest"/>
+
+         <output message="impl:setToneResponse" name="setToneResponse"/>
+
+      </operation>
+      <operation name="delInboxTone" parameterOrder="event">
+
+         <input message="impl:delInboxToneRequest" name="delInboxToneRequest"/>
+
+         <output message="impl:delInboxToneResponse" name="delInboxToneResponse"/>
+
+      </operation>
+      <operation name="querySetting" parameterOrder="event">
+
+         <input message="impl:querySettingRequest" name="querySettingRequest"/>
+
+         <output message="impl:querySettingResponse" name="querySettingResponse"/>
+
+      </operation>
+
+   </portType>
+
+   <binding name="UserToneManageSoapBinding" type="impl:UserToneManage">
+
+      <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <operation name="orderTone">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <input name="orderToneRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://usertonemanage.ivas.huawei.com" use="encoded"/>
+
+         </input>
+
+         <output name="orderToneResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://usertonemanage.ivas.huawei.com" use="encoded"/>
+
+         </output>
+
+      </operation>
+
+      <operation name="delInboxTone">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <input name="delInboxToneRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://usertonemanage.ivas.huawei.com" use="encoded"/>
+
+         </input>
+
+         <output name="delInboxToneResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://usertonemanage.ivas.huawei.com" use="encoded"/>
+
+         </output>
+
+      </operation>
+
+      <operation name="addToneBox">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <input name="addToneBoxRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://usertonemanage.ivas.huawei.com" use="encoded"/>
+
+         </input>
+
+         <output name="addToneBoxResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://usertonemanage.ivas.huawei.com" use="encoded"/>
+
+         </output>
+
+      </operation>
+
+      <operation name="setTone">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <input name="setToneRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://usertonemanage.ivas.huawei.com" use="encoded"/>
+
+         </input>
+
+         <output name="setToneResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://usertonemanage.ivas.huawei.com" use="encoded"/>
+
+         </output>
+
+      </operation>
+
+      <operation name="querySetting">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <input name="querySettingRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://usertonemanage.ivas.huawei.com" use="encoded"/>
+
+         </input>
+
+         <output name="querySettingResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://usertonemanage.ivas.huawei.com" use="encoded"/>
+
+         </output>
+
+      </operation>
+
+   </binding>
+
+   <service name="UserToneManageService">
+
+      <port binding="impl:UserToneManageSoapBinding" name="UserToneManage">
+
+		 <wsdlsoap:address location="http://10.71.62.14:28080/jboss-net/services/UserToneManage"/>
+
+      </port>
+
+   </service>
+
+</definitions>
