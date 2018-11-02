@@ -1,6 +1,6 @@
 package com.ft.web.rest;
 
-import com.ft.AppApp;
+import com.ft.App;
 import com.ft.web.rest.vm.LoggerVM;
 import ch.qos.logback.classic.AsyncAppender;
 import ch.qos.logback.classic.LoggerContext;
@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @see LogsResource
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = AppApp.class)
+@SpringBootTest(classes = App.class)
 public class LogsResourceIntTest {
 
     private MockMvc restLogsMockMvc;

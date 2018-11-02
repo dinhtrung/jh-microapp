@@ -81,7 +81,7 @@ management:
 
 spring:
     application:
-        name: app
+        name: App
     messages:
         basename: i18n/messages
     mvc:
@@ -121,11 +121,11 @@ jhipster:
         #allow-credentials: true
         #max-age: 1800
     mail:
-        from: app@localhost
+        from: App@localhost
     swagger:
         default-include-pattern: /api/.*
-        title: app API
-        description: app API documentation
+        title: App API
+        description: App API documentation
         version: 0.0.1
         terms-of-service-url:
         contact-name:

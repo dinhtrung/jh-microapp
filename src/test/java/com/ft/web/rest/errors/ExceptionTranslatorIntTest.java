@@ -1,6 +1,6 @@
 package com.ft.web.rest.errors;
 
-import com.ft.AppApp;
+import com.ft.App;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @see ExceptionTranslator
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = AppApp.class)
+@SpringBootTest(classes = App.class)
 public class ExceptionTranslatorIntTest {
 
     @Autowired
@@ -44,14 +44,6 @@ public class ExceptionTranslatorIntTest {
             .setControllerAdvice(exceptionTranslator)
             .setMessageConverters(jacksonMessageConverter)
             .build();
-    }
-
-    @Test
-    public void testConcurrencyFailure() throws Exception {
-        mockMvc.perform(get("/test/concurrency-failure"))
-            .andExpect(status().isConflict())
-            .andExpect(content().contentType(MediaType.APPLICATION_PROBLEM_JSON))
-            .andExpect(jsonPath("$.message").value(ErrorConstants.ERR_CONCURRENCY_FAILURE));
     }
 
     @Test

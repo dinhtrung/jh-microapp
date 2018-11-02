@@ -17,17 +17,21 @@ eureka:
     client:
         enabled: false
     instance:
-        appname: app
-        instanceId: app:${spring.application.instance-id:${random.value}}
+        appname: App
+        instanceId: App:${spring.application.instance-id:${random.value}}
 
 spring:
     application:
-        name: app
-    data:
-        mongodb:
-            host: localhost
-            port: 0
-            database: app
+        name: App
+    cloud:
+        stream:
+            kafka:
+                binder:
+                    brokers: localhost
+                    zk-nodes: localhost
+            bindings:
+                output:
+                    destination: topic-jhipster
     mail:
         host: localhost
     messages:
@@ -69,7 +73,7 @@ jhipster:
         authentication:
             jwt:
                 # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
-                base64-secret: NWU2Nzg0YTRjNDgyNjY0M2YxYWRjNWY4ZGRjYjFiZDc0Mzg5MDQ3Nzg0NTE0NGQzNGEwZTczY2ZkMWM2ZjU4MGYwNTkzMWQwNjVkYzc1NmU0ZmI4NWI5OWM3ZjJkZWNmYTJkODg2MDFiM2M4MzFhYzI0MDVlNTliNDZmY2E0YmM=
+                base64-secret: M2I4NWJlMjM5OTU1ZTgwNjQxOGU5ZGJmZGIyZGRlYWQxMGY3NTY2YzA4MzM4OTkxMzJkOWQwMzM4ZTRmYTFlYzA2NTQyMjdhN2NjMDUxMGVkZjBkYjlkZDFiMmRmN2NlNmJkY2YyOGVlOGI0MDE2MjhjMmVmMTQ2YWYwMGI2YzI=
                 # Token is valid 24 hours
                 token-validity-in-seconds: 86400
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
