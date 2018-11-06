@@ -17,7 +17,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ft.soap.AddToneBoxEvt;
 import com.ft.soap.AddToneBoxResp;
 import com.ft.soap.DelInboxToneEvt;
-import com.ft.soap.DelInboxToneResp;
 import com.ft.soap.DelInboxToneResponse;
 import com.ft.soap.OrderToneEvt;
 import com.ft.soap.QuerySettingEvt;
