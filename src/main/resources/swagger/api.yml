@@ -182,7 +182,7 @@ components:
       properties:
         id:
           type: string
-          format: uuid
+          format: string
           example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
           description: The External (Vendor) Transaction Id
         serviceName:
@@ -203,6 +203,10 @@ components:
       required:
         - code
       properties:
+        extTxnId:
+          type: string
+          description: Content Provider Transaction Id. Returned initially when the request was received.
+          example: "d701748f0851"
         tranxId:
           type: string
           description: Etisalat Transaction Id. Returned initially when the request was received.

@@ -21,18 +21,18 @@ import java.util.Collection;
 
 @SpringBootApplication
 @EnableConfigurationProperties({ApplicationProperties.class})
-public class AppApp {
+public class App {
 
-    private static final Logger log = LoggerFactory.getLogger(AppApp.class);
+    private static final Logger log = LoggerFactory.getLogger(App.class);
 
     private final Environment env;
 
-    public AppApp(Environment env) {
+    public App(Environment env) {
         this.env = env;
     }
 
     /**
-     * Initializes app.
+     * Initializes App.
      * <p>
      * Spring profiles can be configured with a program argument --spring.profiles.active=your-active-profile
      * <p>
@@ -57,7 +57,7 @@ public class AppApp {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        SpringApplication app = new SpringApplication(AppApp.class);
+        SpringApplication app = new SpringApplication(App.class);
         DefaultProfileUtil.addDefaultProfile(app);
         Environment env = app.run(args).getEnvironment();
         logApplicationStartup(env);

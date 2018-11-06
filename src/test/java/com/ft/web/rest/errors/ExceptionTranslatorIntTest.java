@@ -1,6 +1,6 @@
 package com.ft.web.rest.errors;
 
-import com.ft.AppApp;
+import com.ft.App;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @see ExceptionTranslator
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = AppApp.class)
+@SpringBootTest(classes = App.class)
 public class ExceptionTranslatorIntTest {
 
     @Autowired

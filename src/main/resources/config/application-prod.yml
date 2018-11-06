@@ -19,23 +19,30 @@ logging:
         com.ft: INFO
         io.github.jhipster: INFO
 
-eureka:
-    instance:
-        prefer-ip-address: true
-    client:
-        service-url:
-            defaultZone: http://admin:${jhipster.registry.password}@localhost:8761/eureka/
-
 spring:
     devtools:
         restart:
             enabled: false
         livereload:
             enabled: false
+    cloud:
+        consul:
+            discovery:
+               prefer-ip-address: true
+            host: localhost
+            port: 8500
+        stream:
+            kafka:
+                binder:
+                    brokers: localhost
+                    zk-nodes: localhost
+            bindings:
+                output:
+                    destination: topic-jhipster
     data:
         mongodb:
             uri: mongodb://localhost:27017
-            database: app
+            database: App
     mail:
         host: localhost
         port: 25
@@ -90,6 +97,14 @@ jhipster:
         version: V_1_1 # To use HTTP/2 you will need SSL support (see above the "server.ssl" configuration)
         cache: # Used by the CachingHttpHeadersFilter
             timeToLiveInDays: 1461
+    cache: # Cache configuration
+        hazelcast: # Hazelcast distributed cache
+            time-to-live-seconds: 3600
+            backup-count: 1
+            management-center: # Full reference is available at: http://docs.hazelcast.org/docs/management-center/3.9/manual/html/Deploying_and_Starting.html
+                enabled: false
+                update-interval: 3
+                url:
     security:
         authentication:
             jwt:
@@ -97,19 +112,19 @@ jhipster:
                 # As this is the PRODUCTION configuration, you MUST change the default key, and store it securely:
                 # - In the JHipster Registry (which includes a Spring Cloud Config server)
                 # - In a separate `application-prod.yml` file, in the same folder as your executable WAR file
-                # - In the `JHIPSTER_SECURITY_AUTHENTICATION_JWT_SECRET` environment variable
-                base64-secret: NWU2Nzg0YTRjNDgyNjY0M2YxYWRjNWY4ZGRjYjFiZDc0Mzg5MDQ3Nzg0NTE0NGQzNGEwZTczY2ZkMWM2ZjU4MGYwNTkzMWQwNjVkYzc1NmU0ZmI4NWI5OWM3ZjJkZWNmYTJkODg2MDFiM2M4MzFhYzI0MDVlNTliNDZmY2E0YmM=
+                # - In the `JHIPSTER_SECURITY_AUTHENTICATION_JWT_BASE64_SECRET` environment variable
+                base64-secret: M2Y2YzJlNDAxZDI0YTRiNDY5OTQ4ZjczZGE2MmRhMzUyZWJjYWY0YWVmMjZiYTkyOWUzMGFmZDg1ZWY0MjE5ZWE5MTk1MTg0MDFmYzUxOTljZTlhYzk0N2ZkYjBkZWI3MzI3YTc1NjMzZTFjMmE5N2U2MmFmYmUxODhiMWVkYjE=
                 # Token is valid 24 hours
                 token-validity-in-seconds: 86400
                 token-validity-in-seconds-for-remember-me: 2592000
     mail: # specific JHipster mail property, for standard properties see MailProperties
-        from: app@localhost
+        from: App@localhost
         base-url: http://my-server-url-to-change # Modify according to your server's URL
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx:
             enabled: true
-        prometheus: 
-            enabled: false #expose metrics via prometheus 
+        prometheus:
+            enabled: false #expose metrics via prometheus
         logs: # Reports Dropwizard metrics in the logs
             enabled: false
             report-frequency: 60 # in seconds

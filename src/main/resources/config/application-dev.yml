@@ -19,13 +19,6 @@ logging:
         io.github.jhipster: DEBUG
         com.ft: DEBUG
 
-eureka:
-    instance:
-        prefer-ip-address: true
-    client:
-        service-url:
-            defaultZone: http://admin:${jhipster.registry.password}@localhost:8761/eureka/
-
 spring:
     profiles:
         active: dev
@@ -40,10 +33,24 @@ spring:
             enabled: false # we use Webpack dev server + BrowserSync for livereload
     jackson:
         serialization.indent_output: true
+    cloud:
+        consul:
+            discovery:
+               prefer-ip-address: true
+            host: localhost
+            port: 8500
+        stream:
+            kafka:
+                binder:
+                    brokers: localhost
+                    zk-nodes: localhost
+            bindings:
+                output:
+                    destination: topic-jhipster
     data:
         mongodb:
             uri: mongodb://localhost:27017
-            database: rbt
+            database: App
     mail:
         host: localhost
         port: 25
@@ -75,6 +82,14 @@ server:
 jhipster:
     http:
         version: V_1_1 # To use HTTP/2 you will need to activate TLS (see application-tls.yml)
+    cache: # Cache configuration
+        hazelcast: # Hazelcast distributed cache
+            time-to-live-seconds: 3600
+            backup-count: 1
+            management-center: # Full reference is available at: http://docs.hazelcast.org/docs/management-center/3.9/manual/html/Deploying_and_Starting.html
+                enabled: false
+                update-interval: 3
+                url: http://localhost:8180/mancenter
     # CORS is disabled by default on microservices, as you should access them through a gateway.
     # If you want to enable it, please uncomment the configuration below.
     # cors:
@@ -88,18 +103,18 @@ jhipster:
         authentication:
             jwt:
                 # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
-                base64-secret: NWU2Nzg0YTRjNDgyNjY0M2YxYWRjNWY4ZGRjYjFiZDc0Mzg5MDQ3Nzg0NTE0NGQzNGEwZTczY2ZkMWM2ZjU4MGYwNTkzMWQwNjVkYzc1NmU0ZmI4NWI5OWM3ZjJkZWNmYTJkODg2MDFiM2M4MzFhYzI0MDVlNTliNDZmY2E0YmM=
+                base64-secret: M2Y2YzJlNDAxZDI0YTRiNDY5OTQ4ZjczZGE2MmRhMzUyZWJjYWY0YWVmMjZiYTkyOWUzMGFmZDg1ZWY0MjE5ZWE5MTk1MTg0MDFmYzUxOTljZTlhYzk0N2ZkYjBkZWI3MzI3YTc1NjMzZTFjMmE5N2U2MmFmYmUxODhiMWVkYjE=
                 # Token is valid 24 hours
                 token-validity-in-seconds: 86400
                 token-validity-in-seconds-for-remember-me: 2592000
     mail: # specific JHipster mail property, for standard properties see MailProperties
-        from: app@localhost
+        from: App@localhost
         base-url: http://127.0.0.1:8081
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx:
             enabled: true
-        prometheus: 
-            enabled: false #expose metrics via prometheus 
+        prometheus:
+            enabled: false #expose metrics via prometheus
         logs: # Reports Dropwizard metrics in the logs
             enabled: false
             report-frequency: 60 # in seconds

@@ -14,32 +14,6 @@
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
-eureka:
-    client:
-        enabled: true
-        healthcheck:
-            enabled: true
-        fetch-registry: true
-        register-with-eureka: true
-        instance-info-replication-interval-seconds: 10
-        registry-fetch-interval-seconds: 10
-    instance:
-        appname: app
-        instanceId: app:${spring.application.instance-id:${random.value}}
-        lease-renewal-interval-in-seconds: 5
-        lease-expiration-duration-in-seconds: 10
-        status-page-url-path: ${management.endpoints.web.base-path}/info
-        health-check-url-path: ${management.endpoints.web.base-path}/health
-        metadata-map:
-            zone: primary # This is needed for the load balancer
-            profile: ${spring.profiles.active}
-            version: ${info.project.version:}
-            git-version: ${git.commit.id.describe:}
-            git-commit: ${git.commit.id.abbrev:}
-            git-branch: ${git.branch:}
-ribbon:
-    eureka:
-        enabled: true
 feign:
     hystrix:
         enabled: true
@@ -81,7 +55,15 @@ management:
 
 spring:
     application:
-        name: app
+        name: App
+    cloud:
+        consul:
+            discovery:
+                healthCheckPath: /management/health
+                instanceId: ${spring.application.name}:${spring.application.instance-id:${random.value}}
+            config:
+                watch:
+                    enabled: false
     messages:
         basename: i18n/messages
     mvc:
@@ -121,11 +103,11 @@ jhipster:
         #allow-credentials: true
         #max-age: 1800
     mail:
-        from: app@localhost
+        from: App@localhost
     swagger:
         default-include-pattern: /api/.*
-        title: app API
-        description: app API documentation
+        title: App API
+        description: App API documentation
         version: 0.0.1
         terms-of-service-url:
         contact-name:
@@ -143,4 +125,68 @@ jhipster:
 # https://www.jhipster.tech/common-application-properties/
 # ===================================================================
 
-# application:
+application:
+    # WORKFLOW CONFIGURATION
+    double-opt-in: true
+    charge-per-sms: false
+    pre-charge-notify: true
+    # SMSC Configuration
+    # Failover SMPP Connection for sending SMS
+    smpp-config:
+        - type: transceiver
+          name: eti-sendsms
+          system-id: test
+          password: test
+          interface-version: 0x34
+          system-type: VMA
+          host: 23.253.160.191
+          port: 2775
+    # Charging Client
+    charging-client-tps: 100
+    charging-config:
+        - type: transceiver
+          name: eti-charge
+          system-id: test
+          password: test
+          interface-version: 0x34
+          system-type: VMA
+          host: 23.253.160.191
+          port: 2776
+    # Mobile Country Code
+    mcc: 234
+    # Default SMS to send back to customer
+    sms:
+        source: 5312
+        text: Text Help to 5312 for more info.
+    submit-sm:
+        source-address:
+            npi: 3
+            ton: 9
+        dest-address:
+            npi: 1
+            ton: 1
+    charging-sm:
+        source-address:
+            npi: 3
+            ton: 9
+        dest-address:
+            npi: 1
+            ton: 1
+        protocol-id: 0x40
+    # Default SubProduct Templates
+    product-tpl:
+        broadcast-shortcode: 30085
+        broadcast-hours: 09:00:00|15:00:00
+        join-channel: 33085
+        left-pattern: STOP
+        broadcast-weekday: 1|2|3|4|5|6|7
+        # Failed to find the confirmation
+        msg-confirm: Sorry, we haven't found your subscription request. To subscribe for Comedy Video text CD, for Zauren Zance text ZZ, for Zauren Mukewaya text ZM, for Islam and Peace text IP to 55310.
+        # Failed to renew
+        msg-renew: Hello, your Zauren Mukewaya subscription will expire in 2 days. You will be charged N100/30 days for renewal. To unsubscribe text STOP ZM to 5312.
+        # Pre-charge notification
+        msg-precharge: Hello, you have been charged N100 for Zauren Mukewaya service for 30 days. To unsubscribe text STOP to 5312.
+        # Used as Help message as well
+        msg-not-used: To subscribe for Time Management text TIME to 33085, for Negotiation Lesson text NL to 33085, for Body Language text BODY to 33085, for more services text MORE to 33085. SMS costs N10/1 day. Text STOP <KEYWORD> to 33085 to unsubscribe (e.g STOP TIME)
+        # Default message templates
+        msg-welcome: Text LD - Leadership Lesson, POWER - Power of Psalm, PUBLIC - Public Speaking, STRATEGY - Strategy, ROMANCE - Romance, WAFFI - Waffi Yarns to 38661 (5N/SMS).
