@@ -26,7 +26,6 @@ import com.ft.domain.Sms;
 import com.ft.domain.SmsContent;
 import com.ft.domain.SmsLog;
 import com.ft.domain.Subscriber;
-import com.ft.domain.SubscriberBillingRequest;
 import com.ft.repository.CdrRepository;
 import com.ft.repository.DndRepository;
 import com.ft.repository.ProvisioningRepository;
@@ -35,7 +34,6 @@ import com.ft.repository.SmsContentRepository;
 import com.ft.repository.SmsLogRepository;
 import com.ft.repository.SmsRepository;
 import com.ft.repository.SubProductRepository;
-import com.ft.repository.SubscriberBillingRequestRepository;
 import com.ft.repository.SubscriberRepository;
 import com.ft.service.dto.ChargingProfile;
 import com.ft.service.util.SmsSender;
@@ -91,8 +89,6 @@ public class SubscriptionService {
     @Autowired
     private CdrRepository cdrRepo;
 
-    @Autowired
-    private SubscriberBillingRequestRepository billingRequestRepo;
     @Autowired
     private ProvisioningRepository provisioningRepo;
 
@@ -158,7 +154,7 @@ public class SubscriptionService {
         }
         long start = System.currentTimeMillis();
         ExecutorService executor = Executors.newFixedThreadPool(700);
-        List<Future<List<SubscriberBillingRequest>>> futures = new ArrayList<>();
+        List<Future<List<Cdr>>> futures = new ArrayList<>();
         LocalDate ld = LocalDate.now();
         Instant instant = ld.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
         Date today = Date.from(instant);
@@ -168,7 +164,7 @@ public class SubscriptionService {
 
         Page<Provisioning> provs = provisioningRepo
                 .findAllByStatusInAndDateLoggedEqualsAndNextRetrialBeforeOrderByTrialCount(
-                        statuses, today, new Date(), new PageRequest(0, 900));
+                        statuses, today, new Date(), PageRequest.of(0, 900));
         List<Provisioning> provisionings = provs.getContent();
         log.info("=== Total subscriptions found (fresh or failed) @  " + (new Date()) + " ==   "
                + provisionings.size());
@@ -181,7 +177,7 @@ public class SubscriptionService {
             if (productOpt.isPresent()) {
             	Product product = productOpt.get();
             	List<SmsContent> contents = msgSvc.getTodayContents(product);
-            	Future<List<SubscriberBillingRequest>> future = executor.submit(new ChargeProductCallable(props, provisioning, subscriber, product,
+            	Future<List<Cdr>> future = executor.submit(new ChargeProductCallable(props, provisioning, subscriber, product,
             			contents, cdrRepo, provisioningRepo, smsLogRepo, smsRepo,
             			msgSvc, mtsender, subscriberRepo, restEndpoint));
             	futures.add(future);
@@ -202,20 +198,20 @@ public class SubscriptionService {
         return 0;
     }
 
-    private void debug(List<Future<List<SubscriberBillingRequest>>> futures) {
+    private void debug(List<Future<List<Cdr>>> futures) {
         if (futures == null || futures.isEmpty()) {
             return;
         }
-        for (Future<List<SubscriberBillingRequest>> fut : futures) {
+        for (Future<List<Cdr>> fut : futures) {
             try {
                 if (fut == null) {
                     log.error("===  Null future  SubscriptionService#debug()  ===  ");
                 } else {
-                    List<SubscriberBillingRequest> requests = fut.get();
+                    List<Cdr> requests = fut.get();
                     if (requests != null) {
-                        for (SubscriberBillingRequest req : requests) {
+                        for (Cdr req : requests) {
                             if (req != null) {
-                                billingRequestRepo.save(req);
+                                cdrRepo.save(req);
                             }
                         }
                     }
@@ -664,7 +660,7 @@ public class SubscriptionService {
             ld = ld.minusDays(1);
             Instant instant = ld.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
             Date date = Date.from(instant);
-            // Take statistics by 1 a.m 
+            // Take statistics by 1 a.m
             long total;
             ProvisioningStat provStat;
             long untried = provisioningRepo.countByStatusEqualsAndDateLoggedIs("fresh", date);

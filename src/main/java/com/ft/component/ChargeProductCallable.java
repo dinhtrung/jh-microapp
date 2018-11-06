@@ -18,7 +18,6 @@ import com.ft.domain.Provisioning;
 import com.ft.domain.Sms;
 import com.ft.domain.SmsContent;
 import com.ft.domain.Subscriber;
-import com.ft.domain.SubscriberBillingRequest;
 import com.ft.repository.CdrRepository;
 import com.ft.repository.ProvisioningRepository;
 import com.ft.repository.SmsLogRepository;
@@ -32,7 +31,7 @@ import com.ft.web.api.model.ChargeResponse;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class ChargeProductCallable implements Callable<List<SubscriberBillingRequest>> {
+public class ChargeProductCallable implements Callable<List<Cdr>> {
 
     private final Logger log = LoggerFactory.getLogger(ChargeProductCallable.class);
 
@@ -101,20 +100,14 @@ public class ChargeProductCallable implements Callable<List<SubscriberBillingReq
     }
 
     @Override
-    public List<SubscriberBillingRequest> call() throws Exception {
-        List<SubscriberBillingRequest> requests = new ArrayList<>();
+    public List<Cdr> call() throws Exception {
+        List<Cdr> requests = new ArrayList<>();
         try {
             Optional<SmsContent> contentOpt = msgSvc.findOne(provisioning.getContentId());
             // fallback
            	SmsContent content = contentOpt.isPresent() ? contentOpt.get() : msgSvc.getTodayContents(product).get(0);
             ZonedDateTime now = ZonedDateTime.now();
             for (ChargingProfile profile : product.getChargingProfiles()) {
-                SubscriberBillingRequest billingRequest = new SubscriberBillingRequest();
-                billingRequest.setMsisdn(subscriber.getMsisdn());
-                billingRequest.setContentId(content.getId());
-                billingRequest.setProductId(product.getId());
-                billingRequest.setRequestDate(now);
-
                 subscriber.setTrialCount(subscriber.getTrialCount() != null ? subscriber.getTrialCount() + 1 : 1);
                 Cdr transaction = new Cdr()
                         .productId(product.getId())
@@ -137,19 +130,12 @@ public class ChargeProductCallable implements Callable<List<SubscriberBillingReq
                     req.setMsisdn(subscriber.getMsisdn());
                 }
                 req.setServiceName(product.getTelcoServiceCode());
-                ChargeResponse restResponse = restTemplate.postForObject(props.getChargingUrl(), req, ChargeResponse.class);
-                //SubmitSmResp resp = mtsender.chargeMessage(profile.getShortCode(), profile.getMessage(), subscriber.getMsisdn());
-                //billingRequest.setResponseErrorCode(resp != null ? "" + resp.getCommandStatus() : "");
-                //billingRequest.setResponseErrorMsg(resp != null ? resp.getResultMessage() : "");
-                //billingRequest.setTransactionId(resp != null ? resp.getMessageId() : "");
-                //billingRequest.setCpTransactionId(resp != null ? resp.getName() : "");
-
-//                billingRequest.setResponseErrorCode(restResponse != null ? restResponse.getCode() : "");
-                billingRequest.setResponseErrorMsg(restResponse != null ? restResponse.getDescription() : "");
-                billingRequest.setTransactionId(restResponse != null ? restResponse.getTranxId() : "");
-                billingRequest.setCpTransactionId(restResponse != null ? restResponse.getContextMsg() : "");
+                ChargeResponse resp = restTemplate.postForObject(props.getChargingUrl(), req, ChargeResponse.class);
+                transaction
+                .requestPayload(req)
+                .responsePayload(resp);
                 //if (resp != null && resp.getCommandStatus() == 0) {  // billing successful
-                if (restResponse != null && restResponse.getCode() != null && restResponse.getCode().equals("200")) {  // billing successful
+                if (resp != null && resp.getCode() != null && resp.getCode().equals("200")) {  // billing successful
                     // I will comment out the whole of this SMS provisioning block
                     // since the success response here only means successfully delivered to
                     // the telco's endpoint Async. We will wait for the actual response later
@@ -198,22 +184,20 @@ public class ChargeProductCallable implements Callable<List<SubscriberBillingReq
                     provisioning.setNextRetrial(null);
                     provisioningRepo.save(provisioning);
 
-                    billingRequest.setAmountCharged(profile.getChargePrice().doubleValue());
-                    billingRequest.setResponseStatus("pending");
-                    requests.add(billingRequest);
+                    requests.add(transaction);
                     //subscriberRepo.save(subscriber);
                     break;
                 } else {
-//                    transaction
-//                            .status(false)
-//                            .amount(0.0)
-//                            .responsePayload(String.valueOf(resp != null ? resp.getCommandStatus() : ""))
-//                            .note(resp != null ? resp.getMessageId() : "")
-//                            .responseAt(ZonedDateTime.now());
-//                    cdrRepository.save(transaction);
-                    billingRequest.setAmountCharged(0.0);
-                    billingRequest.setResponseStatus("failed");
-                    requests.add(billingRequest);
+                    transaction
+                            .status(false)
+                            .amount(0.0)
+                            .responsePayload(resp)
+                            .note(resp != null ? resp.getTranxId() : "")
+                            .responseAt(ZonedDateTime.now());
+                    cdrRepository.save(transaction);
+//                    billingRequest.setAmountCharged(0.0);
+//                    billingRequest.setResponseStatus("failed");
+//                    requests.add(billingRequest);
                     Calendar instance = Calendar.getInstance();
                     if (provisioning.getStatus().equalsIgnoreCase("failed")) {
                         provisioning.setTrialCount(provisioning.getTrialCount() + 1);

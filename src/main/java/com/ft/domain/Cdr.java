@@ -40,14 +40,14 @@ public class Cdr implements Serializable {
     private String contentId;
 
     @Field("request_payload")
-    private String requestPayload;
+    private Object requestPayload;
 
     @Field("request_at")
     @Indexed
     private ZonedDateTime requestAt;
 
     @Field("response_payload")
-    private String responsePayload;
+    private Object responsePayload;
 
     @Field("response_at")
     private ZonedDateTime responseAt;
@@ -176,16 +176,16 @@ public class Cdr implements Serializable {
         this.contentId = contentId;
     }
 
-    public String getRequestPayload() {
+    public Object getRequestPayload() {
         return requestPayload;
     }
 
-    public Cdr requestPayload(String extraData) {
+    public Cdr requestPayload(Object extraData) {
         this.requestPayload = extraData;
         return this;
     }
 
-    public void setRequestPayload(String requestPayload) {
+    public void setRequestPayload(Object requestPayload) {
         this.requestPayload = requestPayload;
     }
 
@@ -202,16 +202,16 @@ public class Cdr implements Serializable {
         this.requestAt = requestAt;
     }
 
-    public String getResponsePayload() {
+    public Object getResponsePayload() {
         return responsePayload;
     }
 
-    public Cdr responsePayload(String responsePayload) {
+    public Cdr responsePayload(Object responsePayload) {
         this.responsePayload = responsePayload;
         return this;
     }
 
-    public void setResponsePayload(String responsePayload) {
+    public void setResponsePayload(Object responsePayload) {
         this.responsePayload = responsePayload;
     }
 

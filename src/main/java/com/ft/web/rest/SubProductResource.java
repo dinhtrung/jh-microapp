@@ -58,9 +58,9 @@ public class SubProductResource {
     @Timed
     public ResponseEntity<Product> createSubProduct(@Valid @RequestBody Product subProduct) throws URISyntaxException {
         log.debug("REST request to save SubProduct : {}", subProduct);
-        if (subProduct.getId() != null) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new subProduct cannot already have an ID")).body(null);
-        }
+//        if (subProduct.getId() != null) {
+//            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new subProduct cannot already have an ID")).body(null);
+//        }
         Product result = subProductService.save(subProduct);
         return ResponseEntity.created(new URI("/api/sub-products/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
