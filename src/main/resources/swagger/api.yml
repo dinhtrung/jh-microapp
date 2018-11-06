@@ -1,7 +1,264 @@
-# API-first development with OpenAPI
-# This file will be used at compile time to generate Spring-MVC endpoint stubs using openapi-generator
-openapi: "3.0.1"
+openapi: 3.0.0
+# Added by API Auto Mocking Plugin
+servers:
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/foxtechvn/9mobile-direct-billing/1.0.0
 info:
-  title: "app"
-  version: 0.0.1
-paths: {}
+  description: 'This document provides the developers with instructions to integrate with Etisalat Direct Billing API. The document is divided in three main sections: Synchronous flow, Asynchronous flow and Batch flow.'
+  version: "1.0.0"
+  title: Direct Billing API
+  contact:
+    email: contact@9mobile.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+tags:
+  - name: synchronous
+    description: bill synchronously a customer on Etisalat platform
+  - name: asynchronous
+    description: bill asynchronously a customer on Etisalat platform
+  - name: batch
+    description: batch charging a list of customers on Etisalat platform
+paths:
+  /sync:
+    post:
+      tags:
+        - synchronous
+      summary: Charge a customer in synchronous work flow
+      operationId: chargeSync
+      description: The charge result will be return directly upon success or failure
+      responses:
+        '200':
+          description: The request was processed with success. Check the `code` in response body to analyse the result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chargeResponse'
+        '400':
+          description: The request was malformed (invalid parameters)
+        '401':
+          description: Invalid Subscription Key or Invalid Authorization Header
+        '429':
+          description: Passed the TPS authorized
+        '403':
+          description: Origin IP not registered
+      parameters: 
+        - in: header
+          name: Ocp-Apim-Subscription-Key
+          required: true
+          schema:
+            type: string
+            example: "un05a0ia0123449ae470di967371372c"
+        - in: header
+          name: username
+          required: true
+          schema:
+            type: string
+            example: "vendor5"
+        - in: header
+          name: Authentication
+          required: true
+          schema:
+            type: string
+            example: "uZG9yNTp2ZW5kb3JwYXNzd2Q="
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/chargeRequest'
+        description: Charging Information
+  /async:
+    post:
+      tags:
+        - asynchronous
+      summary: Charge a customer in Async workflow
+      operationId: chargeAsync
+      description: Charge a customer in async workflow
+      responses:
+        '200':
+          description: The request was processed with success. Check the `code` in response body to analyse the result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chargeResponse'
+        '400':
+          description: The request was malformed (invalid parameters)
+        '401':
+          description: Invalid Subscription Key or Invalid Authorization Header
+        '429':
+          description: Passed the TPS authorized
+        '403':
+          description: Origin IP not registered
+      parameters: 
+        - in: header
+          name: Ocp-Apim-Subscription-Key
+          required: true
+          schema:
+            type: string
+            example: "un05a0ia0123449ae470di967371372c"
+        - in: header
+          name: username
+          required: true
+          schema:
+            type: string
+            example: "vendor5"
+        - in: header
+          name: Authentication
+          required: true
+          schema:
+            type: string
+            example: "uZG9yNTp2ZW5kb3JwYXNzd2Q="
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/chargeRequest'
+        description: Charging Information
+  /batch:
+    post:
+      tags:
+        - batch
+      summary: adds an inventory item
+      operationId: addInventory
+      description: Adds an item to the system
+      responses:
+        '200':
+          description: Batch notification successful. Processing will commence
+        '202':
+          description: The name to the uploaded file is missing in the request
+        '201':
+          description: System Error. Please try again later
+        '204':
+          description: No data was found in the request
+        '203':
+          description: The file uploaded is corrupt. Kindly upload a new one
+        '208':
+          description: Sorry your account has been suspended
+        '209':
+          description: The account with the specified username was not found
+        '211':
+          description: The service name contains invalid characters. Only alphanumeric characters with(out) spaces are allowed
+        '212':
+          description: The service being billed for does not exist.
+        '213':
+          description: The request has been processed before.
+        '214':
+          description: The list of services could not be loaded. Please
+      parameters: 
+        - in: header
+          name: Ocp-Apim-Subscription-Key
+          required: true
+          schema:
+            type: string
+            example: "un05a0ia0123449ae470di967371372c"
+        - in: header
+          name: username
+          required: true
+          schema:
+            type: string
+            example: "vendor5"
+        - in: header
+          name: Authentication
+          required: true
+          schema:
+            type: string
+            example: "uZG9yNTp2ZW5kb3JwYXNzd2Q="
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/batchDataFile'
+        description: Charging Information
+  
+components:
+  schemas:
+    chargeRequest:
+      type: object
+      required:
+        - serviceName
+        - msisdn
+        - id
+        - amount
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+          description: The External (Vendor) Transaction Id
+        serviceName:
+          type: string
+          example: "musicservice"
+          description: The Name of the Vendor Service
+        msisdn:
+          type: string
+          format: int32
+          example: "08061234567"
+          description: MSISDN of the Subscriber
+        amount:
+          type: string
+          format: long
+          example: "10"
+          description: Amount to be charged
+    chargeResponse:
+      required:
+        - code
+      properties:
+        tranxId:
+          type: string
+          description: Etisalat Transaction Id. Returned initially when the request was received.
+          example: "d701748f0851"
+        code:
+          type: integer
+          description: >
+            Billing Result code. Used to determine the result of the request.
+            
+            * `0` - Request successfully received
+            
+            * `206` - System Error 
+            
+            * `200` - Payment Success 
+            
+            * `201` - Payment failure 
+            
+            * `222` - Non Etisalat Number 
+            
+            * `202` - Insufficient Balance 
+            
+            * `225` - Subscriber doesn’t exist 
+            
+            * `226` - Subscriber in Idle status 
+            
+            * `227` - Subscriber suspended 
+            
+            * `228` - Subscriber in disabled state 
+            
+            * `229` - Subscriber in pool state 
+            
+            * `230` - Subscriber in recharge blacklist 
+            
+            * `231` - Subscriber barred 
+            
+            * `232` - Request already processed 
+            
+            * `236` - API called wrongly
+            
+            * `237` - Transaction successfully Billed before 
+            
+            * `238` - Transaction being processed 
+          example: 200
+        description:
+          type: string
+          description: Billing Result Description
+          example: 'The payment was successful'
+        contextMsg:
+          type: string
+          description: Detailed Error Message
+      type: object
+    batchDataFile:
+      type: object
+      required:
+        - filename
+      properties:
+        filename:
+          type: string
+          description: Name of the file dropped in the FTP server, to be processed
