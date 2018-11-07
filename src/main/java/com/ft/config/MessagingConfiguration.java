@@ -36,9 +36,6 @@ public class MessagingConfiguration {
     @Value("${spring.application.name:sms}")
     private String applicationName;
     
-    @Autowired
-    private SmsRepository smsRepo;
-
     /**
      * This sends a test message at regular intervals set as fixedRate (in ms)
      *
@@ -52,11 +49,13 @@ public class MessagingConfiguration {
             + " sent at " + LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
     }
 
+    @Autowired
+    private SmsRepository smsRepo;
+
     /**
      * Other SMS sender should return this message as SMS
      * @param sms
      */
-    @Bean
     @StreamListener(target = Processor.INPUT, condition = "headers['" + MessageHeaders.CONTENT_TYPE + "']=='SMS'")
     public void handleSumissionResult(Sms sms) {
     	log.debug("Receive one SMS to save {}", sms);

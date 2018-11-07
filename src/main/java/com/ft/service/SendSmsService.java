@@ -20,7 +20,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import com.ft.components.VasCloudSmsSubmitCallable;
+import com.ft.components.SmsSubmitCallable;
 import com.ft.domain.Campaign;
 import com.ft.domain.Sms;
 import com.ft.repository.CampaignRepository;
@@ -28,9 +28,9 @@ import com.ft.repository.SmsRepository;
 
 @EnableScheduling
 @Service
-public class VasCloudSendSmsService {
+public class SendSmsService {
 
-    private final Logger log = LoggerFactory.getLogger(VasCloudSendSmsService.class);
+    private final Logger log = LoggerFactory.getLogger(SendSmsService.class);
 
     @Autowired
     SmsRepository smsRepo;
@@ -60,7 +60,7 @@ public class VasCloudSendSmsService {
     			cpRepo.save(cp.state(9)); // No more SMS? Mark it as submitted
     			continue;
     		}
-			VasCloudSmsSubmitCallable sendSmsTask = applicationContext.getBean(VasCloudSmsSubmitCallable.class);
+			SmsSubmitCallable sendSmsTask = applicationContext.getBean(SmsSubmitCallable.class);
 			sendSmsTask.setSmsList(tobeSubmit);
 			sendSmsTask.setCampaign(cp);
 			// Run it!

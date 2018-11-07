@@ -3,10 +3,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.ft</groupId>
-    <artifactId>app</artifactId>
+    <artifactId>campaign-manager-admin</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>App</name>
+    <name>Campaign Manager Administration Micro Service</name>
 
     <repositories>
         <!-- jhipster-needle-maven-repository -->

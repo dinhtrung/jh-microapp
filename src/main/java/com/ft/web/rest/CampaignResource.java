@@ -7,7 +7,7 @@ import com.ft.domain.Campaign;
 import com.ft.repository.SmsRepository;
 import com.ft.security.SecurityUtils;
 import com.ft.service.CampaignService;
-import com.ft.service.VasCloudSendSmsService;
+import com.ft.service.SendSmsService;
 import com.ft.web.rest.errors.BadRequestAlertException;
 import com.ft.web.rest.util.HeaderUtil;
 import com.ft.web.rest.util.PaginationUtil;
@@ -174,7 +174,7 @@ public class CampaignResource {
     ObjectMapper mapper;
 
     @Autowired
-    VasCloudSendSmsService smsSendingService;
+    SendSmsService smsSendingService;
 
     /**
      * GET  /campaigns/:id/import : get the "id" campaign.

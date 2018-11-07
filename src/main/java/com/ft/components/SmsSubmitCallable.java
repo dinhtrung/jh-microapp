@@ -32,9 +32,9 @@ import io.github.bucket4j.Bucket4j;
 
 @Component
 @Scope("prototype")
-public class VasCloudSmsSubmitCallable implements Callable<Long> {
+public class SmsSubmitCallable implements Callable<Long> {
 
-    private final Logger log = LoggerFactory.getLogger(VasCloudSmsSubmitCallable.class);
+    private final Logger log = LoggerFactory.getLogger(SmsSubmitCallable.class);
 
     private List<Sms> smsList;
 
