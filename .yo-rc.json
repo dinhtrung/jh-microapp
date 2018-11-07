@@ -6,10 +6,10 @@
     "packageName": "com.ft",
     "packageFolder": "com/ft",
     "serverPort": 8081,
-    "serviceDiscoveryType": "eureka",
+    "serviceDiscoveryType": "consul",
     "authenticationType": "jwt",
     "uaaBaseName": "../uaa",
-    "cacheProvider": "no",
+    "cacheProvider": "hazelcast",
     "enableHibernateCache": false,
     "websocket": false,
     "databaseType": "mongodb",
@@ -30,12 +30,9 @@
     ],
     "clientFramework": "angularX",
     "jhiPrefix": "jhi",
-    "jhipsterVersion": "5.5.0",
-    "jwtSecretKey": "NWU2Nzg0YTRjNDgyNjY0M2YxYWRjNWY4ZGRjYjFiZDc0Mzg5MDQ3Nzg0NTE0NGQzNGEwZTczY2ZkMWM2ZjU4MGYwNTkzMWQwNjVkYzc1NmU0ZmI4NWI5OWM3ZjJkZWNmYTJkODg2MDFiM2M4MzFhYzI0MDVlNTliNDZmY2E0YmM=",
+    "jhipsterVersion": "5.6.1",
+    "jwtSecretKey": "ZmI5ZTAyM2JlMzhkNDc1Yzc0YzdiNDFjMDM4YWNlY2RjYTk4NzM4OTBhZTk3MzM5ZmEwY2M5MjNkM2JlMTA1ODk4OTc5ODBmNDdlY2NkNjIwMjFiYmIzMjYzMzUwYTY0OWMyNTI5NWEzZmQ4NDQzOWEzMjg1MTc4YmY1MmJkMGU=",
     "skipClient": true,
     "skipUserManagement": true
-  },
-  "git-provider": "GitHub",
-  "git-company": "dinhtrung",
-  "repository-name": "jh-microapp"
+  }
 }
