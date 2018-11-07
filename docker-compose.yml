@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  app:
+    image: registry.gitlab.com/istt.com.vn/oam:vasgate-adapter
+    ports:
+      - 28181:8081
+    environment:
+      - APPLICATION_VASGATE_ENDPOINT=https://apigateway.mobifone.vn/mbfn/sb/SOAPRequestServicecps

@@ -13,21 +13,15 @@
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
-eureka:
-    client:
-        enabled: false
-    instance:
-        appname: app
-        instanceId: app:${spring.application.instance-id:${random.value}}
 
 spring:
     application:
-        name: app
+        name: App
     data:
         mongodb:
             host: localhost
             port: 0
-            database: app
+            database: App
     mail:
         host: localhost
     messages:
@@ -42,10 +36,6 @@ spring:
 server:
     port: 10344
     address: localhost
-
-info:
-    project:
-        version: #project.version#
 
 # ===================================================================
 # JHipster specific properties
@@ -65,11 +55,14 @@ jhipster:
             host: localhost
             port: 5000
             queue-size: 512
+    mail:
+        from: test@localhost
+        base-url: http://127.0.0.1:8080
     security:
         authentication:
             jwt:
                 # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
-                base64-secret: NWU2Nzg0YTRjNDgyNjY0M2YxYWRjNWY4ZGRjYjFiZDc0Mzg5MDQ3Nzg0NTE0NGQzNGEwZTczY2ZkMWM2ZjU4MGYwNTkzMWQwNjVkYzc1NmU0ZmI4NWI5OWM3ZjJkZWNmYTJkODg2MDFiM2M4MzFhYzI0MDVlNTliNDZmY2E0YmM=
+                base64-secret: NWI2ZWEwODkzZWNhOTA4NmQ5MThmZmMyNDc4MjNjN2YyZTQ5MzE1MjMyNjQ1ZGFjNWRlMTg0ZDM0YTdjZmJkYzE3NjUxOGJiNWM5YTFiYTk3OGU2NTc1NmM0NzdkN2M3NzQ1NDA2ODhkY2ExNTE0YWU0NGI3OWE5ZDdjNjVkMmE=
                 # Token is valid 24 hours
                 token-validity-in-seconds: 86400
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
