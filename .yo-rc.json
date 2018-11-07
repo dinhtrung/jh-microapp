@@ -3,8 +3,8 @@
     "applicationType": "monolith",
     "gitCompany": "",
     "baseName": "App",
-    "packageName": "io.github.jhipster.application",
-    "packageFolder": "io/github/jhipster/application",
+    "packageName": "com.ft",
+    "packageFolder": "com/ft",
     "serverPort": 8080,
     "serviceDiscoveryType": false,
     "authenticationType": "jwt",
@@ -25,12 +25,12 @@
     "enableTranslation": true,
     "nativeLanguage": "en",
     "languages": [
-      "en",
-      "vi"
+      "vi",
+      "en"
     ],
     "clientFramework": "angularX",
     "jhiPrefix": "jhi",
     "jhipsterVersion": "5.6.1",
-    "jwtSecretKey": "NWU2Nzg0YTRjNDgyNjY0M2YxYWRjNWY4ZGRjYjFiZDc0Mzg5MDQ3Nzg0NTE0NGQzNGEwZTczY2ZkMWM2ZjU4MGYwNTkzMWQwNjVkYzc1NmU0ZmI4NWI5OWM3ZjJkZWNmYTJkODg2MDFiM2M4MzFhYzI0MDVlNTliNDZmY2E0YmM="
+    "jwtSecretKey": "NWI2ZWEwODkzZWNhOTA4NmQ5MThmZmMyNDc4MjNjN2YyZTQ5MzE1MjMyNjQ1ZGFjNWRlMTg0ZDM0YTdjZmJkYzE3NjUxOGJiNWM5YTFiYTk3OGU2NTc1NmM0NzdkN2M3NzQ1NDA2ODhkY2ExNTE0YWU0NGI3OWE5ZDdjNjVkMmE="
   }
 }
