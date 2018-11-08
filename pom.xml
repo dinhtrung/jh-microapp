@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.ft</groupId>
-    <artifactId>campaign-manager-admin</artifactId>
+    <artifactId>cm-ui</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Campaign Manager Administration Micro Service</name>
@@ -283,6 +283,7 @@
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- Kafka support -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-stream</artifactId>
@@ -557,7 +558,7 @@
                           <image>openjdk:8-jre-alpine</image>
                       </from>
                       <to>
-                          <image>app:latest</image>
+                          <image>registry.gitlab.com/foxtechvn/jh-microapp:${project.artifactId}</image>
                       </to>
                       <container>
                           <entrypoint>
